@@ -1,3 +1,9 @@
+/* ===========================
+   MediInfo BD v1.0
+   style.css
+   Part 1
+=========================== */
+
 *{
 margin:0;
 padding:0;
@@ -5,90 +11,835 @@ box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
 background:#f5f7fb;
 color:#222;
+line-height:1.6;
 }
 
-.header{
-background:#0d6efd;
-color:white;
-padding:25px;
-text-align:center;
+.container{
+width:95%;
+max-width:1200px;
+margin:auto;
 }
 
-.header h1{
-font-size:34px;
-margin-bottom:8px;
-}
-
-.menu{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:12px;
-padding:15px;
-background:white;
-box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.menu a{
+a{
 text-decoration:none;
-color:#0d6efd;
+color:inherit;
+}
+
+img{
+max-width:100%;
+display:block;
+}
+
+/* ================= Header ================= */
+
+.top-header{
+
+background:#1565c0;
+color:#fff;
+padding:18px 0;
+
+}
+
+.top-header .container{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+
+}
+
+.logo{
+
+font-size:30px;
 font-weight:bold;
+
+}
+
+.navbar{
+
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+
+}
+
+.navbar a{
+
 padding:10px 16px;
 border-radius:8px;
+transition:.3s;
+
 }
 
-.menu a:hover{
-background:#0d6efd;
+.navbar a:hover{
+
+background:white;
+color:#1565c0;
+
+}
+
+/* ================= Hero ================= */
+
+.hero{
+
+background:linear-gradient(135deg,#1565c0,#42a5f5);
 color:white;
+padding:60px 20px;
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:38px;
+margin-bottom:20px;
+
+}
+
+.hero p{
+
+font-size:18px;
+margin-bottom:30px;
+
 }
 
 .search-box{
-max-width:900px;
-margin:30px auto;
-text-align:center;
-}
 
-.search-box h2{
-margin-bottom:15px;
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+
 }
 
 .search-box input{
-width:95%;
-max-width:700px;
+
+width:650px;
+max-width:100%;
 padding:15px;
-font-size:18px;
-border:2px solid #0d6efd;
+border:none;
 border-radius:10px;
+font-size:17px;
+
 }
 
-#homeContent{
-max-width:1200px;
-margin:auto;
-padding:20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:20px;
+.search-box button{
+
+padding:15px 25px;
+background:#0d47a1;
+border:none;
+color:white;
+border-radius:10px;
+cursor:pointer;
+
 }
+
+.search-box button:hover{
+
+background:#08306b;
+
+}
+/* ===========================
+   style.css
+   Part 2
+=========================== */
+
+/* ========== Section ========== */
+
+section{
+
+padding:50px 0;
+
+}
+
+.section-title{
+
+font-size:28px;
+color:#1565c0;
+margin-bottom:25px;
+text-align:center;
+
+}
+
+/* ========== Grid ========== */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+
+}
+
+/* ========== Card ========== */
 
 .card{
-background:white;
-padding:20px;
+
+background:#fff;
 border-radius:12px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+padding:20px;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+
 }
 
 .card h3{
-margin-bottom:15px;
-color:#0d6efd;
+
+color:#1565c0;
+
+margin-bottom:10px;
+
+font-size:20px;
+
 }
 
-footer{
-margin-top:40px;
-background:#0d6efd;
-color:white;
-text-align:center;
-padding:20px;
+.card p{
+
+font-size:15px;
+
+margin-bottom:8px;
+
+line-height:1.6;
+
 }
+
+/* ========== Info Card ========== */
+
+.info-card{
+
+background:white;
+
+padding:25px;
+
+border-radius:12px;
+
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.info-card ul{
+
+margin-top:15px;
+
+padding-left:20px;
+
+}
+
+.info-card li{
+
+margin-bottom:10px;
+
+}
+
+/* ========== Loading ========== */
+
+.loading{
+
+text-align:center;
+
+padding:25px;
+
+font-size:18px;
+
+color:#777;
+
+}
+
+/* ========== Notice Board ========== */
+
+#noticeBoard{
+
+border-left:6px solid #1565c0;
+
+}
+
+/* ========== Button ========== */
+
+button{
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+opacity:.9;
+
+}
+
+/* ========== Empty Data ========== */
+
+.empty{
+
+padding:30px;
+
+text-align:center;
+
+color:#999;
+
+font-size:17px;
+
+}
+
+/* ========== Badge ========== */
+
+.badge{
+
+display:inline-block;
+
+padding:5px 12px;
+
+background:#1565c0;
+
+color:white;
+
+border-radius:20px;
+
+font-size:13px;
+
+margin-top:10px;
+
+}
+/* ===========================
+   MediInfo BD v1.0
+   style.css
+   Part 3
+=========================== */
+
+/* ===== Information Card ===== */
+
+.info-card{
+
+background:#ffffff;
+padding:25px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+margin-bottom:25px;
+
+}
+
+.info-card p{
+
+margin-bottom:15px;
+
+}
+
+.info-card ul{
+
+padding-left:20px;
+
+}
+
+.info-card li{
+
+margin:10px 0;
+
+}
+
+/* ===== Notice Board ===== */
+
+#noticeBoard{
+
+background:#fff8e1;
+border-left:6px solid #ffc107;
+
+}
+
+/* ===== Footer ===== */
+
+footer{
+
+margin-top:50px;
+background:#0d47a1;
+color:white;
+padding:50px 0 20px;
+
+}
+
+.footer-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+margin-bottom:25px;
+
+}
+
+.footer-grid h3{
+
+margin-bottom:15px;
+
+}
+
+.footer-grid ul{
+
+list-style:none;
+
+}
+
+.footer-grid li{
+
+margin:10px 0;
+
+}
+
+.footer-grid a{
+
+color:white;
+transition:.3s;
+
+}
+
+.footer-grid a:hover{
+
+color:#ffd54f;
+
+}
+
+footer hr{
+
+border:none;
+height:1px;
+background:rgba(255,255,255,.2);
+margin:20px 0;
+
+}
+
+.copyright{
+
+text-align:center;
+font-size:15px;
+
+}
+
+/* ===== Utility ===== */
+
+.hidden{
+
+display:none !important;
+
+}
+
+.text-center{
+
+text-align:center;
+
+}
+
+.mt-20{
+
+margin-top:20px;
+
+}
+
+.mb-20{
+
+margin-bottom:20px;
+
+}
+
+.loading{
+
+text-align:center;
+padding:30px;
+font-size:18px;
+color:#1565c0;
+
+}
+
+/* ===== Mobile Responsive ===== */
+
+@media(max-width:768px){
+
+.hero h1{
+
+font-size:28px;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+}
+
+.logo{
+
+font-size:24px;
+
+}
+
+.navbar{
+
+justify-content:center;
+
+}
+
+.search-box{
+
+flex-direction:column;
+
+}
+
+.search-box input{
+
+width:100%;
+
+}
+
+.search-box button{
+
+width:100%;
+
+}
+
+.section-title{
+
+font-size:24px;
+
+}
+
+.footer-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.container{
+
+width:94%;
+
+}
+
+.hero{
+
+padding:40px 15px;
+
+}
+
+.card{
+
+padding:15px;
+
+}
+
+}
+/* ===========================
+   MediInfo BD v1.0
+   style.css
+   Part 4 (Admin Panel)
+=========================== */
+
+/* ===== Login Page ===== */
+
+.login-box{
+
+max-width:420px;
+margin:70px auto;
+background:#fff;
+padding:30px;
+border-radius:12px;
+box-shadow:0 4px 15px rgba(0,0,0,.1);
+
+}
+
+.login-box h2{
+
+text-align:center;
+margin-bottom:25px;
+color:#1565c0;
+
+}
+
+.login-box input{
+
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:16px;
+
+}
+
+.login-box button{
+
+width:100%;
+padding:14px;
+background:#1565c0;
+color:#fff;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+
+}
+
+.login-box button:hover{
+
+background:#0d47a1;
+
+}
+
+/* ===== Dashboard ===== */
+
+.dashboard{
+
+display:flex;
+min-height:100vh;
+
+}
+
+.sidebar{
+
+width:250px;
+background:#1565c0;
+color:#fff;
+padding:20px;
+
+}
+
+.sidebar h2{
+
+text-align:center;
+margin-bottom:20px;
+
+}
+
+.sidebar a{
+
+display:block;
+padding:12px;
+margin-bottom:8px;
+border-radius:8px;
+color:#fff;
+transition:.3s;
+
+}
+
+.sidebar a:hover{
+
+background:rgba(255,255,255,.2);
+
+}
+
+.main-content{
+
+flex:1;
+padding:25px;
+
+}
+
+/* ===== Dashboard Cards ===== */
+
+.dashboard-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+margin-bottom:25px;
+
+}
+
+.dashboard-card{
+
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+text-align:center;
+
+}
+
+.dashboard-card h2{
+
+font-size:34px;
+color:#1565c0;
+margin-top:10px;
+
+}
+
+/* ===== Form ===== */
+
+.form-box{
+
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+margin-bottom:25px;
+
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea{
+
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:15px;
+
+}
+
+.form-box textarea{
+
+resize:vertical;
+min-height:120px;
+
+}
+
+.form-box button{
+
+padding:12px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:15px;
+
+}
+
+/* ===== Buttons ===== */
+
+.btn-primary{
+
+background:#1565c0;
+color:#fff;
+
+}
+
+.btn-success{
+
+background:#2e7d32;
+color:#fff;
+
+}
+
+.btn-warning{
+
+background:#f9a825;
+color:#fff;
+
+}
+
+.btn-danger{
+
+background:#d32f2f;
+color:#fff;
+
+}
+
+.btn-primary:hover{
+
+background:#0d47a1;
+
+}
+
+.btn-success:hover{
+
+background:#1b5e20;
+
+}
+
+.btn-warning:hover{
+
+background:#f57f17;
+
+}
+
+.btn-danger:hover{
+
+background:#b71c1c;
+
+}
+
+/* ===== Table ===== */
+
+.table-box{
+
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+overflow-x:auto;
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+
+}
+
+table th{
+
+background:#1565c0;
+color:#fff;
+padding:12px;
+
+}
+
+table td{
+
+padding:12px;
+border-bottom:1px solid #eee;
+
+}
+
+table tr:hover{
+
+background:#f5f7fb;
+
+}
+
+/* ===== Status ===== */
+
+.success{
+
+color:#2e7d32;
+font-weight:bold;
+
+}
+
+.error{
+
+color:#d32f2f;
+font-weight:bold;
+
+}
+
+.warning{
+
+color:#f9a825;
+font-weight:bold;
+
+}
+
+/* ===== Responsive Dashboard ===== */
+
+@media(max-width:900px
