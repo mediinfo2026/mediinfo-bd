@@ -1,3 +1,5 @@
+console.log("Dashboard JS Loaded");
+alert("Dashboard JS Loaded");
 import { db, auth } from "../firebase.js";
 
 import {
