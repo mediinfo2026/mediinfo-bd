@@ -1,62 +1,130 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MediInfo BD - Admin Dashboard</title>
+
+<title>MediInfo BD | Admin Dashboard</title>
 
 <link rel="stylesheet" href="../style.css">
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f4f7fb;
+background:#f4f6fb;
 }
 
 header{
-    background:#1565c0;
-    color:#fff;
-    padding:20px;
-    text-align:center;
+background:#1565c0;
+color:white;
+padding:18px;
+text-align:center;
 }
 
-.container{
-    max-width:1000px;
-    margin:25px auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-    padding:15px;
+.wrapper{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+
+width:250px;
+background:#0d47a1;
+padding:20px;
+
+}
+
+.sidebar h2{
+color:white;
+margin-bottom:20px;
+text-align:center;
+}
+
+.sidebar a{
+
+display:block;
+color:white;
+text-decoration:none;
+padding:12px;
+margin-bottom:8px;
+border-radius:8px;
+
+}
+
+.sidebar a:hover{
+
+background:#1976d2;
+
+}
+
+.content{
+
+flex:1;
+padding:20px;
+
+}
+
+.cards{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-bottom:25px;
+
 }
 
 .card{
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    text-align:center;
-    text-decoration:none;
-    color:#1565c0;
-    font-weight:bold;
-    box-shadow:0 2px 10px rgba(0,0,0,.1);
+
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+text-align:center;
+
 }
 
-.card:hover{
-    background:#1565c0;
-    color:#fff;
+.card h2{
+
+color:#1565c0;
+font-size:30px;
+
 }
 
-.logout{
-    display:block;
-    width:200px;
-    margin:20px auto;
-    padding:12px;
-    border:none;
-    background:#d32f2f;
-    color:#fff;
-    border-radius:8px;
-    font-size:16px;
+.main-box{
+
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+
 }
+
+button{
+
+padding:10px 20px;
+border:none;
+background:#d32f2f;
+color:white;
+border-radius:8px;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#b71c1c;
+
+}
+
 </style>
 
 </head>
@@ -65,65 +133,103 @@ header{
 
 <header>
 
-<h1>MediInfo BD Admin</h1>
+<h1>🩺 MediInfo BD Admin Panel</h1>
 
-<p>Control Panel</p>
+<p>বাংলাদেশের স্বাস্থ্য তথ্যভাণ্ডার</p>
 
 </header>
 
-<div class="container">
+<div class="wrapper">
 
-<a class="card" href="tests.html">🧪 Tests</a>
+<div class="sidebar">
 
-<a class="card" href="categories.html">📂 Categories</a>
+<h2>MENU</h2>
 
-<a class="card" href="departments.html">🏥 Departments</a>
+<a href="#" id="menuDashboard">📊 Dashboard</a>
 
-<a class="card" href="diseases.html">🤒 Diseases</a>
+<a href="#" id="menuTests">🧪 Tests</a>
 
-<a class="card" href="doctor-guides.html">👨‍⚕️ Doctor Guide</a>
+<a href="#" id="menuCategories">📂 Categories</a>
 
-<a class="card" href="hospitals.html">🏨 Hospitals</a>
+<a href="#" id="menuDiseases">🤒 Diseases</a>
 
-<a class="card" href="diagnostic-centers.html">🔬 Diagnostic Centers</a>
+<a href="#" id="menuDepartments">🏥 Departments</a>
 
-<a class="card" href="test-prices.html">💰 Test Prices</a>
+<a href="#" id="menuDoctors">👨‍⚕️ Doctor Guide</a>
 
-<a class="card" href="settings.html">⚙ Settings</a>
+<a href="#" id="menuHospitals">🏨 Hospitals</a>
+
+<a href="#" id="menuDiagnostic">🔬 Diagnostic Centers</a>
+
+<a href="#" id="menuPrices">💰 Test Prices</a>
+
+<a href="#" id="menuSettings">⚙ Settings</a>
+
+<br>
+
+<button id="logoutBtn">Logout</button>
 
 </div>
 
-<button id="logoutBtn" class="logout">Logout</button>
+<div class="content">
 
-<script type="module">
+<div class="cards">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import {
-getAuth,
-signOut
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyAW6fOFxcKNtS7iB4XpGEHyoQKKbL_yXSA",
-  authDomain: "mediinfo-bd.firebaseapp.com",
-  projectId: "mediinfo-bd",
-  storageBucket: "mediinfo-bd.firebasestorage.app",
-  messagingSenderId: "903946041697",
-  appId: "1:903946041697:web:4bc1fe6e053896a282ed20"
-};
+<div class="card">
+<p>Tests</p>
+<h2 id="testsCount">0</h2>
+</div>
 
-const app=initializeApp(firebaseConfig);
+<div class="card">
+<p>Categories</p>
+<h2 id="categoriesCount">0</h2>
+</div>
 
-const auth=getAuth(app);
+<div class="card">
+<p>Diseases</p>
+<h2 id="diseasesCount">0</h2>
+</div>
 
-document.getElementById("logoutBtn").onclick=async()=>{
+<div class="card">
+<p>Departments</p>
+<h2 id="departmentsCount">0</h2>
+</div>
 
-await signOut(auth);
+<div class="card">
+<p>Doctors</p>
+<h2 id="doctorsCount">0</h2>
+</div>
 
-location.href="login.html";
+<div class="card">
+<p>Hospitals</p>
+<h2 id="hospitalsCount">0</h2>
+</div>
 
-}
+</div>
 
-</script>
+<div class="main-box">
+
+<h2 id="pageTitle">Dashboard</h2>
+
+<p>
+
+এখান থেকেই ভবিষ্যতে Tests, Categories, Diseases,
+Hospitals, Doctor Guide সহ সবকিছু Add, Edit এবং Delete করা হবে।
+
+</p>
+
+<div id="contentArea">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="module" src="dashboard.js"></script>
 
 </body>
+
 </html>
