@@ -4,34 +4,42 @@ import {
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
+// আপনার firebaseConfig এখানে বসান
 const firebaseConfig = {
-  apiKey: "AIzaSyAW6fOFxcKNtS7iB4XpGEHyoQKKbL_yXSA",
-  authDomain: "mediinfo-bd.firebaseapp.com",
-  projectId: "mediinfo-bd",
-  storageBucket: "mediinfo-bd.firebasestorage.app",
-  messagingSenderId: "903946041697",
-  appId: "1:903946041697:web:4bc1fe6e053896a282ed20",
-  measurementId: "G-RYBYTCY1V4"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-document.getElementById("loginBtn").addEventListener("click", async () => {
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const error = document.getElementById("error");
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+loginBtn.addEventListener("click", async () => {
+
+  error.textContent = "";
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
 
-    alert("✅ Login Successful");
+    await signInWithEmailAndPassword(
+      auth,
+      email.value,
+      password.value
+    );
 
-    location.href = "dashboard.html";
+    window.location.href = "dashboard.html";
 
   } catch (err) {
 
-    alert(err.message);
+    error.textContent = "ইমেইল অথবা পাসওয়ার্ড ভুল।";
+    console.error(err);
 
   }
 
