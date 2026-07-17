@@ -3,52 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MediInfo BD Admin</title>
+<title>MediInfo BD - Admin Dashboard</title>
+
 <link rel="stylesheet" href="../style.css">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+}
+
+header{
+    background:#1565c0;
+    color:#fff;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:1000px;
+    margin:25px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    padding:15px;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    text-decoration:none;
+    color:#1565c0;
+    font-weight:bold;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.card:hover{
+    background:#1565c0;
+    color:#fff;
+}
+
+.logout{
+    display:block;
+    width:200px;
+    margin:20px auto;
+    padding:12px;
+    border:none;
+    background:#d32f2f;
+    color:#fff;
+    border-radius:8px;
+    font-size:16px;
+}
+</style>
+
 </head>
+
 <body>
 
 <header>
-<h1>🩺 MediInfo BD Admin Panel</h1>
-<p>সব তথ্য এখান থেকে পরিচালনা করুন</p>
+
+<h1>MediInfo BD Admin</h1>
+
+<p>Control Panel</p>
+
 </header>
 
-<main>
+<div class="container">
 
-<div class="card">
-<h2>📊 Dashboard</h2>
+<a class="card" href="tests.html">🧪 Tests</a>
 
-<button onclick="location.href='tests.html'">
-🧪 Test Manager
-</button>
+<a class="card" href="categories.html">📂 Categories</a>
 
-<br><br>
+<a class="card" href="departments.html">🏥 Departments</a>
 
-<button onclick="location.href='diseases.html'">
-🦠 Disease Manager
-</button>
+<a class="card" href="diseases.html">🤒 Diseases</a>
 
-<br><br>
+<a class="card" href="doctor-guides.html">👨‍⚕️ Doctor Guide</a>
 
-<button onclick="location.href='doctors.html'">
-👨‍⚕️ Doctor Guide
-</button>
+<a class="card" href="hospitals.html">🏨 Hospitals</a>
 
-<br><br>
+<a class="card" href="diagnostic-centers.html">🔬 Diagnostic Centers</a>
 
-<button onclick="location.href='categories.html'">
-📂 Categories
-</button>
+<a class="card" href="test-prices.html">💰 Test Prices</a>
 
-<br><br>
-
-<button onclick="location.href='diagnostics.html'">
-🏥 Diagnostic Centers
-</button>
+<a class="card" href="settings.html">⚙ Settings</a>
 
 </div>
 
-</main>
+<button id="logoutBtn" class="logout">Logout</button>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+getAuth,
+signOut
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "আপনার API KEY",
+  authDomain: "আপনার AUTH DOMAIN",
+  projectId: "আপনার PROJECT ID",
+  storageBucket: "আপনার STORAGE BUCKET",
+  messagingSenderId: "আপনার SENDER ID",
+  appId: "আপনার APP ID"
+};
+
+const app=initializeApp(firebaseConfig);
+
+const auth=getAuth(app);
+
+document.getElementById("logoutBtn").onclick=async()=>{
+
+await signOut(auth);
+
+location.href="login.html";
+
+}
+
+</script>
 
 </body>
 </html>
