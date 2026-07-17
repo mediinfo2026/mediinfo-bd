@@ -1,46 +1,190 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+// admin/login.js
+
+
+import { auth } from "../firebase.js";
+
+
 import {
-  getAuth,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-// আপনার firebaseConfig এখানে বসান
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+signInWithEmailAndPassword,
+onAuthStateChanged
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+}
 
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const loginBtn = document.getElementById("loginBtn");
-const error = document.getElementById("error");
+from
 
-loginBtn.addEventListener("click", async () => {
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-  error.textContent = "";
 
-  try {
 
-    await signInWithEmailAndPassword(
-      auth,
-      email.value,
-      password.value
-    );
 
-    window.location.href = "dashboard.html";
 
-  } catch (err) {
+// Login Function
 
-    error.textContent = "ইমেইল অথবা পাসওয়ার্ড ভুল।";
-    console.error(err);
 
-  }
+window.adminLogin = async function(){
 
-});
+
+
+const email =
+
+document.getElementById("email").value.trim();
+
+
+
+const password =
+
+document.getElementById("password").value.trim();
+
+
+
+
+
+if(!email || !password){
+
+
+alert(
+"Email এবং Password দিন"
+);
+
+
+return;
+
+
+}
+
+
+
+
+try{
+
+
+await signInWithEmailAndPassword(
+
+auth,
+
+email,
+
+password
+
+);
+
+
+
+alert(
+"✅ Login Successful"
+);
+
+
+
+// Dashboard Redirect
+
+
+window.location.href =
+"dashboard.html";
+
+
+
+}
+
+
+catch(error){
+
+
+
+console.log(
+error
+);
+
+
+
+if(error.code === 
+"auth/invalid-credential"){
+
+
+
+alert(
+"❌ Email অথবা Password ভুল"
+);
+
+
+
+}
+
+else if(error.code === 
+"auth/invalid-email"){
+
+
+
+alert(
+"❌ Email সঠিক নয়"
+);
+
+
+
+}
+
+else{
+
+
+alert(
+"Login Failed"
+);
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// Check Existing Login
+
+
+onAuthStateChanged(
+auth,
+(user)=>{
+
+
+if(user){
+
+
+
+const page =
+window.location.pathname;
+
+
+
+if(
+page.includes("login.html")
+){
+
+
+window.location.href =
+"dashboard.html";
+
+
+}
+
+
+
+}
+
+
+
+}
+
+);
