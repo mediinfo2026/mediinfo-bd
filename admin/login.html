@@ -1,102 +1,301 @@
 <!DOCTYPE html>
+
 <html lang="bn">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MediInfo BD - Admin Login</title>
 
-<link rel="stylesheet" href="../style.css">
+<title>
+MediTest BD Admin Login
+</title>
+
+
 
 <style>
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f3f6fb;
+
+
+*{
+
+box-sizing:border-box;
+
 }
+
+
+
+body{
+
+margin:0;
+
+font-family:"Noto Sans Bengali",Arial,sans-serif;
+
+background:#f5f7fb;
+
+height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+
 
 .login-box{
-    max-width:400px;
-    margin:80px auto;
-    background:#fff;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 0 15px rgba(0,0,0,.1);
+
+
+width:90%;
+
+max-width:400px;
+
+background:white;
+
+padding:30px;
+
+border-radius:15px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+
+
 }
 
-h1{
-    text-align:center;
-    color:#1565c0;
+
+
+.logo{
+
+text-align:center;
+
+margin-bottom:25px;
+
 }
 
-p{
-    text-align:center;
-    color:#666;
+
+
+.logo h1{
+
+color:#0F62FE;
+
+margin:0;
+
+font-size:28px;
+
 }
+
+
+
+.logo p{
+
+color:#666;
+
+}
+
+
+
+
+
+label{
+
+display:block;
+
+margin-top:15px;
+
+font-weight:bold;
+
+}
+
+
+
 
 input{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:8px;
-    font-size:16px;
-    box-sizing:border-box;
+
+
+width:100%;
+
+padding:13px;
+
+margin-top:8px;
+
+border:1px solid #ddd;
+
+border-radius:8px;
+
+font-size:16px;
+
+
 }
+
+
 
 button{
-    width:100%;
-    padding:12px;
-    border:none;
-    background:#1565c0;
-    color:white;
-    font-size:16px;
-    border-radius:8px;
-    cursor:pointer;
+
+
+width:100%;
+
+padding:13px;
+
+margin-top:25px;
+
+background:#0F62FE;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+font-size:17px;
+
+cursor:pointer;
+
+
 }
+
+
 
 button:hover{
-    background:#0d47a1;
+
+
+background:#0848b8;
+
+
 }
 
-#error{
-    color:red;
-    text-align:center;
-    margin-top:15px;
+
+
+
+.note{
+
+text-align:center;
+
+margin-top:20px;
+
+font-size:14px;
+
+color:#777;
+
 }
+
+
+
+
 </style>
+
 
 </head>
 
+
+
 <body>
+
+
+
 
 <div class="login-box">
 
-<h1>MediInfo BD</h1>
 
-<p>Admin Login</p>
 
-<input
-type="email"
-id="email"
-placeholder="Admin Email">
+<div class="logo">
 
-<input
-type="password"
-id="password"
-placeholder="Password">
 
-<button id="loginBtn">
+<h1>
+🩺 MediTest BD
+</h1>
 
-Login
 
-</button>
+<p>
+Admin Panel Login
+</p>
 
-<p id="error"></p>
 
 </div>
 
-<script type="module" src="login.js"></script>
+
+
+
+
+
+<label>
+Email Address
+</label>
+
+
+<input
+
+type="email"
+
+id="email"
+
+placeholder="admin@gmail.com"
+
+>
+
+
+
+
+<label>
+Password
+</label>
+
+
+<input
+
+type="password"
+
+id="password"
+
+placeholder="Password"
+
+>
+
+
+
+
+
+
+<button onclick="adminLogin()">
+
+🔐 Login
+
+</button>
+
+
+
+
+
+<p class="note">
+
+শুধুমাত্র Admin ব্যবহার করতে পারবেন
+
+</p>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<script
+
+type="module"
+
+src="login.js">
+
+</script>
+
+
+
 
 </body>
+
 </html>
