@@ -3,13 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MediInfo BD</title>
+
+<title>MediInfo BD - বাংলাদেশের স্বাস্থ্য তথ্যভাণ্ডার</title>
+
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>MediInfo BD</h1>
-<p>বাংলাদেশের স্বাস্থ্য তথ্যভাণ্ডার</p>
+<header class="header">
+    <h1>🩺 MediInfo BD</h1>
+    <p>বাংলাদেশের স্বাস্থ্য তথ্যভাণ্ডার</p>
+</header>
+
+<nav class="menu">
+    <a href="index.html">🏠 Home</a>
+    <a href="#">🧪 Tests</a>
+    <a href="#">🏥 Hospitals</a>
+    <a href="#">👨‍⚕️ Doctor Guide</a>
+    <a href="#">ℹ️ About</a>
+</nav>
+
+<section class="search-box">
+
+<h2>🔍 স্বাস্থ্য তথ্য খুঁজুন</h2>
+
+<input
+type="text"
+id="search"
+placeholder="টেস্ট, রোগ, ডাক্তার, হাসপাতাল লিখুন...">
+
+</section>
+
+<section id="homeContent">
+
+<div class="card">
+<h3>🧪 Medical Tests</h3>
+<div id="testsList"></div>
+</div>
+
+<div class="card">
+<h3>🏥 Hospitals</h3>
+<div id="hospitalList"></div>
+</div>
+
+<div class="card">
+<h3>👨‍⚕️ Doctor Guide</h3>
+<div id="doctorGuideList"></div>
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 MediInfo BD</p>
+<p>বাংলাদেশের সর্ববৃহৎ স্বাস্থ্য তথ্যভাণ্ডার</p>
+
+</footer>
+
+<script type="module" src="app.js"></script>
 
 </body>
 </html>
