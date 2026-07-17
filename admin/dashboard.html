@@ -1,234 +1,605 @@
 <!DOCTYPE html>
+
 <html lang="bn">
 
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MediInfo BD | Admin Dashboard</title>
 
-<link rel="stylesheet" href="../style.css">
+<title>
+MediTest BD Admin Dashboard
+</title>
+
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
 
 body{
-background:#f4f6fb;
+
+margin:0;
+
+font-family:"Noto Sans Bengali",Arial,sans-serif;
+
+background:#f5f7fb;
+
 }
+
+
 
 header{
-background:#1565c0;
+
+background:#0F62FE;
+
 color:white;
-padding:18px;
-text-align:center;
-}
 
-.wrapper{
-display:flex;
-min-height:100vh;
-}
-
-.sidebar{
-
-width:250px;
-background:#0d47a1;
 padding:20px;
 
-}
-
-.sidebar h2{
-color:white;
-margin-bottom:20px;
 text-align:center;
-}
-
-.sidebar a{
-
-display:block;
-color:white;
-text-decoration:none;
-padding:12px;
-margin-bottom:8px;
-border-radius:8px;
 
 }
 
-.sidebar a:hover{
 
-background:#1976d2;
 
-}
+header h1{
 
-.content{
-
-flex:1;
-padding:20px;
+margin:0;
 
 }
 
-.cards{
+
+
+
+.container{
+
+width:90%;
+
+max-width:1100px;
+
+margin:30px auto;
+
+}
+
+
+
+
+
+.grid{
+
 
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:15px;
-margin-bottom:25px;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
 
 }
+
+
+
 
 .card{
 
+
 background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+
+padding:25px;
+
+border-radius:15px;
+
 text-align:center;
 
-}
+box-shadow:0 4px 15px rgba(0,0,0,.08);
 
-.card h2{
+transition:.3s;
 
-color:#1565c0;
-font-size:30px;
 
 }
 
-.main-box{
 
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+
+.card:hover{
+
+transform:translateY(-5px);
 
 }
 
-button{
 
-padding:10px 20px;
-border:none;
-background:#d32f2f;
+
+
+
+.card h3{
+
+color:#0F62FE;
+
+margin-top:10px;
+
+}
+
+
+
+
+.card p{
+
+color:#666;
+
+}
+
+
+
+.btn{
+
+
+display:inline-block;
+
+background:#0F62FE;
+
 color:white;
+
+padding:12px 20px;
+
 border-radius:8px;
-cursor:pointer;
+
+text-decoration:none;
+
+margin-top:10px;
 
 }
 
-button:hover{
 
-background:#b71c1c;
+
+.btn:hover{
+
+background:#0848b8;
 
 }
+
+
+
+
+
+.logout{
+
+
+background:#dc3545;
+
+}
+
+
+
+.logout:hover{
+
+background:#a71d2a;
+
+}
+
+
+
+
+footer{
+
+
+text-align:center;
+
+padding:20px;
+
+color:#777;
+
+
+}
+
+
 
 </style>
 
+
 </head>
+
+
 
 <body>
 
+
+
+
 <header>
 
-<h1>🩺 MediInfo BD Admin Panel</h1>
 
-<p>বাংলাদেশের স্বাস্থ্য তথ্যভাণ্ডার</p>
+<h1>
+🩺 MediTest BD
+</h1>
+
+
+<p>
+Admin Dashboard
+</p>
+
 
 </header>
 
-<div class="wrapper">
 
-<div class="sidebar">
 
-<h2>MENU</h2>
 
-<a href="#" id="menuDashboard">📊 Dashboard</a>
 
-<a href="#" id="menuTests">🧪 Tests</a>
 
-<a href="#" id="menuCategories">📂 Categories</a>
 
-<a href="#" id="menuDiseases">🤒 Diseases</a>
+<div class="container">
 
-<a href="#" id="menuDepartments">🏥 Departments</a>
 
-<a href="#" id="menuDoctors">👨‍⚕️ Doctor Guide</a>
 
-<a href="#" id="menuHospitals">🏨 Hospitals</a>
+<div class="grid">
 
-<a href="#" id="menuDiagnostic">🔬 Diagnostic Centers</a>
 
-<a href="#" id="menuPrices">💰 Test Prices</a>
 
-<a href="#" id="menuSettings">⚙ Settings</a>
 
-<br>
 
-<button id="logoutBtn">Logout</button>
 
-</div>
-
-<div class="content">
-
-<div class="cards">
+<!-- Tests -->
 
 <div class="card">
-<p>Tests</p>
-<h2 id="testsCount">0</h2>
-</div>
 
-<div class="card">
-<p>Categories</p>
-<h2 id="categoriesCount">0</h2>
-</div>
 
-<div class="card">
-<p>Diseases</p>
-<h2 id="diseasesCount">0</h2>
-</div>
+<h3>
+🧪 Tests
+</h3>
 
-<div class="card">
-<p>Departments</p>
-<h2 id="departmentsCount">0</h2>
-</div>
-
-<div class="card">
-<p>Doctors</p>
-<h2 id="doctorsCount">0</h2>
-</div>
-
-<div class="card">
-<p>Hospitals</p>
-<h2 id="hospitalsCount">0</h2>
-</div>
-
-</div>
-
-<div class="main-box">
-
-<h2 id="pageTitle">Dashboard</h2>
 
 <p>
-
-এখান থেকেই ভবিষ্যতে Tests, Categories, Diseases,
-Hospitals, Doctor Guide সহ সবকিছু Add, Edit এবং Delete করা হবে।
-
+Medical Test Management
 </p>
 
-<div id="contentArea">
+
+<a class="btn" href="test.html">
+
+Open
+
+</a>
+
 
 </div>
 
-</div>
+
+
+
+
+
+
+<!-- Test Prices -->
+
+<div class="card">
+
+
+<h3>
+💰 Test Prices
+</h3>
+
+
+<p>
+Diagnostic Test Price Management
+</p>
+
+
+<a class="btn" href="test-prices.html">
+
+Open
+
+</a>
+
 
 </div>
 
+
+
+
+
+
+
+<!-- Hospitals -->
+
+<div class="card">
+
+
+<h3>
+🏥 Hospitals
+</h3>
+
+
+<p>
+Hospital Directory Management
+</p>
+
+
+<a class="btn" href="hospitals.html">
+
+Open
+
+</a>
+
+
 </div>
 
-<script type="module" src="dashboard.js"></script>
+
+
+
+
+
+
+<!-- Diagnostic Centers -->
+
+<div class="card">
+
+
+<h3>
+🔬 Diagnostic Centers
+</h3>
+
+
+<p>
+Center Information Management
+</p>
+
+
+<a class="btn" href="diagnostic-centers.html">
+
+Open
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Diseases -->
+
+<div class="card">
+
+
+<h3>
+🦠 Diseases
+</h3>
+
+
+<p>
+Disease Information Database
+</p>
+
+
+<a class="btn" href="diseases.html">
+
+Open
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Doctor Guides -->
+
+<div class="card">
+
+
+<h3>
+👨‍⚕️ Doctor Guides
+</h3>
+
+
+<p>
+Medical Advice Content
+</p>
+
+
+<a class="btn" href="doctor-guides.html">
+
+Open
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Departments -->
+
+<div class="card">
+
+
+<h3>
+🏬 Departments
+</h3>
+
+
+<p>
+Medical Department Management
+</p>
+
+
+<a class="btn" href="departments.html">
+
+Open
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Settings -->
+
+<div class="card">
+
+
+<h3>
+⚙️ Settings
+</h3>
+
+
+<p>
+Website Settings
+</p>
+
+
+<a class="btn" href="setting.html">
+
+Open
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Logout -->
+
+
+<div class="card">
+
+
+<h3>
+🚪 Logout
+</h3>
+
+
+<p>
+Admin Account Logout
+</p>
+
+
+<a class="btn logout" href="login.html">
+
+Logout
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<footer>
+
+© 2026 MediTest BD Admin Panel
+
+</footer>
+
+
+
+
+
+
+<script type="module">
+
+
+import { auth } from "../firebase.js";
+
+
+import {
+
+onAuthStateChanged,
+signOut
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+
+
+
+// Check Login
+
+
+onAuthStateChanged(auth,(user)=>{
+
+
+if(!user){
+
+
+window.location.href="login.html";
+
+
+}
+
+
+});
+
+
+
+
+
+
+
+// Logout
+
+
+window.logout=function(){
+
+
+signOut(auth).then(()=>{
+
+
+window.location.href="login.html";
+
+
+});
+
+
+}
+
+
+
+
+
+</script>
+
+
+
 
 </body>
 
