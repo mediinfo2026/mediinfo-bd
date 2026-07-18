@@ -7,7 +7,7 @@
     <url>
 
         <loc>
-            https://YOUR-DOMAIN.vercel.app/
+            https://mediinfo-bd.vercel.app/
         </loc>
 
         <changefreq>
@@ -24,7 +24,7 @@
     <url>
 
         <loc>
-            https://YOUR-DOMAIN.vercel.app/tests.html
+            https://mediinfo-bd.vercel.app/tests.html
         </loc>
 
         <changefreq>
@@ -41,7 +41,7 @@
     <url>
 
         <loc>
-            https://YOUR-DOMAIN.vercel.app/diseases.html
+            https://mediinfo-bd.vercel.app/diseases.html
         </loc>
 
         <changefreq>
@@ -58,7 +58,7 @@
     <url>
 
         <loc>
-            https://YOUR-DOMAIN.vercel.app/hospitals.html
+            https://mediinfo-bd.vercel.app/hospitals.html
         </loc>
 
         <changefreq>
@@ -75,7 +75,7 @@
     <url>
 
         <loc>
-            https://YOUR-DOMAIN.vercel.app/diagnostic-centers.html
+            https://mediinfo-bd.vercel.app/diagnostic-centers.html
         </loc>
 
         <changefreq>
@@ -92,7 +92,7 @@
     <url>
 
         <loc>
-            https://YOUR-DOMAIN.vercel.app/departments.html
+            https://mediinfo-bd.vercel.app/departments.html
         </loc>
 
         <changefreq>
@@ -109,7 +109,7 @@
     <url>
 
         <loc>
-            https://YOUR-DOMAIN.vercel.app/doctor-guides.html
+            https://mediinfo-bd.vercel.app/doctor-guides.html
         </loc>
 
         <changefreq>
@@ -126,7 +126,7 @@
     <url>
 
         <loc>
-            https://YOUR-DOMAIN.vercel.app/about.html
+            https://mediinfo-bd.vercel.app/about.html
         </loc>
 
         <changefreq>
@@ -143,7 +143,7 @@
     <url>
 
         <loc>
-            https://YOUR-DOMAIN.vercel.app/contact.html
+            https://mediinfo-bd.vercel.app/contact.html
         </loc>
 
         <changefreq>
