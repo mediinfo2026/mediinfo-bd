@@ -1,604 +1,865 @@
 <!DOCTYPE html>
-
 <html lang="bn">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>MediTest BD - Admin Dashboard</title>
 
-<title>
-MediTest BD Admin Dashboard
-</title>
 
+    <style>
 
-<style>
+        * {
+            box-sizing: border-box;
+        }
 
 
-body{
+        body {
 
-margin:0;
+            margin: 0;
 
-font-family:"Noto Sans Bengali",Arial,sans-serif;
+            font-family: Arial, "Noto Sans Bengali", sans-serif;
 
-background:#f5f7fb;
+            background: #f4f7fb;
 
-}
+            color: #222;
 
+        }
 
 
-header{
+        /* =========================
+           HEADER
+        ========================== */
 
-background:#0F62FE;
+        header {
 
-color:white;
+            background: #0F62FE;
 
-padding:20px;
+            color: white;
 
-text-align:center;
+            padding: 18px 20px;
 
-}
+            display: flex;
 
+            justify-content: space-between;
 
+            align-items: center;
 
-header h1{
+            gap: 15px;
 
-margin:0;
+        }
 
-}
 
+        header h1 {
 
+            margin: 0;
 
+            font-size: 24px;
 
-.container{
+        }
 
-width:90%;
 
-max-width:1100px;
+        header p {
 
-margin:30px auto;
+            margin: 5px 0 0;
 
-}
+            opacity: .9;
 
+        }
 
 
+        .logout-btn {
 
+            background: #dc3545;
 
-.grid{
+            color: white;
 
+            border: none;
 
-display:grid;
+            padding: 10px 16px;
 
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            border-radius: 8px;
 
-gap:20px;
+            cursor: pointer;
 
+            font-size: 15px;
 
-}
+        }
 
 
+        .logout-btn:hover {
 
+            background: #b02a37;
 
-.card{
+        }
 
 
-background:white;
+        /* =========================
+           CONTAINER
+        ========================== */
 
-padding:25px;
+        .container {
 
-border-radius:15px;
+            width: 94%;
 
-text-align:center;
+            max-width: 1200px;
 
-box-shadow:0 4px 15px rgba(0,0,0,.08);
+            margin: 25px auto;
 
-transition:.3s;
+        }
 
 
-}
+        /* =========================
+           WELCOME
+        ========================== */
 
+        .welcome-box {
 
+            background: white;
 
-.card:hover{
+            padding: 20px;
 
-transform:translateY(-5px);
+            border-radius: 12px;
 
-}
+            margin-bottom: 25px;
 
+            box-shadow: 0 3px 12px rgba(0,0,0,.08);
 
+        }
 
 
+        .welcome-box h2 {
 
-.card h3{
+            margin: 0 0 8px;
 
-color:#0F62FE;
+            color: #0F62FE;
 
-margin-top:10px;
+        }
 
-}
 
+        #adminEmail {
 
+            color: #555;
 
+            word-break: break-word;
 
-.card p{
+        }
 
-color:#666;
 
-}
+        /* =========================
+           STATISTICS
+        ========================== */
 
+        .stats-grid {
 
+            display: grid;
 
-.btn{
+            grid-template-columns: repeat(
 
+                auto-fit,
 
-display:inline-block;
+                minmax(180px, 1fr)
 
-background:#0F62FE;
+            );
 
-color:white;
+            gap: 18px;
 
-padding:12px 20px;
+            margin-bottom: 30px;
 
-border-radius:8px;
+        }
 
-text-decoration:none;
 
-margin-top:10px;
+        .stat-card {
 
-}
+            background: white;
 
+            padding: 20px;
 
+            border-radius: 12px;
 
-.btn:hover{
+            box-shadow: 0 3px 12px rgba(0,0,0,.08);
 
-background:#0848b8;
+            text-align: center;
 
-}
+        }
 
 
+        .stat-card h3 {
 
+            margin: 0 0 10px;
 
+            font-size: 16px;
 
-.logout{
+            color: #555;
 
+        }
 
-background:#dc3545;
 
-}
+        .stat-number {
 
+            font-size: 30px;
 
+            font-weight: bold;
 
-.logout:hover{
+            color: #0F62FE;
 
-background:#a71d2a;
+        }
 
-}
 
+        /* =========================
+           MODULES
+        ========================== */
 
+        .section-title {
 
+            color: #0F62FE;
 
-footer{
+            margin-bottom: 15px;
 
+        }
 
-text-align:center;
 
-padding:20px;
+        .module-grid {
 
-color:#777;
+            display: grid;
 
+            grid-template-columns: repeat(
 
-}
+                auto-fit,
 
+                minmax(220px, 1fr)
 
+            );
 
-</style>
+            gap: 18px;
 
+        }
+
+
+        .module-card {
+
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 3px 12px rgba(0,0,0,.08);
+
+        }
+
+
+        .module-card h3 {
+
+            margin-top: 0;
+
+            color: #0F62FE;
+
+        }
+
+
+        .module-card p {
+
+            color: #666;
+
+            min-height: 42px;
+
+        }
+
+
+        .open-btn {
+
+            display: inline-block;
+
+            background: #0F62FE;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 10px 16px;
+
+            border-radius: 7px;
+
+        }
+
+
+        .open-btn:hover {
+
+            background: #0848b8;
+
+        }
+
+
+        /* =========================
+           LOADING
+        ========================== */
+
+        .loading {
+
+            text-align: center;
+
+            padding: 30px;
+
+            color: #666;
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            margin-top: 30px;
+
+            color: #777;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+
+            header {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                text-align: center;
+
+            }
+
+
+            header h1 {
+
+                font-size: 21px;
+
+            }
+
+
+            .logout-btn {
+
+                width: 100%;
+
+            }
+
+
+            .container {
+
+                width: 92%;
+
+            }
+
+        }
+
+
+    </style>
 
 </head>
-
 
 
 <body>
 
 
+    <!-- HEADER -->
 
+    <header>
 
-<header>
+        <div>
 
+            <h1>🩺 MediTest BD</h1>
 
-<h1>
-🩺 MediTest BD
-</h1>
+            <p>Admin Dashboard</p>
 
+        </div>
 
-<p>
-Admin Dashboard
-</p>
 
+        <button
 
-</header>
+            id="logoutBtn"
 
+            class="logout-btn"
 
+        >
 
+            🚪 Logout
 
+        </button>
 
+    </header>
 
 
-<div class="container">
 
+    <!-- MAIN -->
 
+    <main class="container">
 
-<div class="grid">
 
+        <!-- WELCOME -->
 
+        <section class="welcome-box">
 
+            <h2>স্বাগতম, Admin 👋</h2>
 
+            <p>
 
+                Login Email:
 
-<!-- Tests -->
+                <strong id="adminEmail">
 
-<div class="card">
+                    Loading...
 
+                </strong>
 
-<h3>
-🧪 Tests
-</h3>
+            </p>
 
+        </section>
 
-<p>
-Medical Test Management
-</p>
 
 
-<a class="btn" href="test.html">
+        <!-- STATISTICS -->
 
-Open
+        <h2 class="section-title">
 
-</a>
+            📊 Website Statistics
 
+        </h2>
 
-</div>
 
+        <section class="stats-grid">
 
 
+            <div class="stat-card">
 
+                <h3>🧪 Total Tests</h3>
 
+                <div
 
+                    id="totalTests"
 
-<!-- Test Prices -->
+                    class="stat-number"
 
-<div class="card">
+                >
 
+                    0
 
-<h3>
-💰 Test Prices
-</h3>
+                </div>
 
+            </div>
 
-<p>
-Diagnostic Test Price Management
-</p>
 
+            <div class="stat-card">
 
-<a class="btn" href="test-prices.html">
+                <h3>💰 Test Prices</h3>
 
-Open
+                <div
 
-</a>
+                    id="totalPrices"
 
+                    class="stat-number"
 
-</div>
+                >
 
+                    0
 
+                </div>
 
+            </div>
 
 
+            <div class="stat-card">
 
+                <h3>🏥 Hospitals</h3>
 
-<!-- Hospitals -->
+                <div
 
-<div class="card">
+                    id="totalHospitals"
 
+                    class="stat-number"
 
-<h3>
-🏥 Hospitals
-</h3>
+                >
 
+                    0
 
-<p>
-Hospital Directory Management
-</p>
+                </div>
 
+            </div>
 
-<a class="btn" href="hospitals.html">
 
-Open
+            <div class="stat-card">
 
-</a>
+                <h3>🔬 Diagnostic Centers</h3>
 
+                <div
 
-</div>
+                    id="totalCenters"
 
+                    class="stat-number"
 
+                >
 
+                    0
 
+                </div>
 
+            </div>
 
 
-<!-- Diagnostic Centers -->
+            <div class="stat-card">
 
-<div class="card">
+                <h3>🦠 Diseases</h3>
 
+                <div
 
-<h3>
-🔬 Diagnostic Centers
-</h3>
+                    id="totalDiseases"
 
+                    class="stat-number"
 
-<p>
-Center Information Management
-</p>
+                >
 
+                    0
 
-<a class="btn" href="diagnostic-centers.html">
+                </div>
 
-Open
+            </div>
 
-</a>
 
+            <div class="stat-card">
 
-</div>
+                <h3>👨‍⚕️ Doctor Guides</h3>
 
+                <div
 
+                    id="totalGuides"
 
+                    class="stat-number"
 
+                >
 
+                    0
 
+                </div>
 
-<!-- Diseases -->
+            </div>
 
-<div class="card">
 
+            <div class="stat-card">
 
-<h3>
-🦠 Diseases
-</h3>
+                <h3>🏬 Departments</h3>
 
+                <div
 
-<p>
-Disease Information Database
-</p>
+                    id="totalDepartments"
 
+                    class="stat-number"
 
-<a class="btn" href="diseases.html">
+                >
 
-Open
+                    0
 
-</a>
+                </div>
 
+            </div>
 
-</div>
 
+            <div class="stat-card">
 
+                <h3>📂 Categories</h3>
 
+                <div
 
+                    id="totalCategories"
 
+                    class="stat-number"
 
+                >
 
-<!-- Doctor Guides -->
+                    0
 
-<div class="card">
+                </div>
 
+            </div>
 
-<h3>
-👨‍⚕️ Doctor Guides
-</h3>
 
+        </section>
 
-<p>
-Medical Advice Content
-</p>
 
 
-<a class="btn" href="doctor-guides.html">
+        <!-- MODULES -->
 
-Open
+        <h2 class="section-title">
 
-</a>
+            ⚙️ Management Modules
 
+        </h2>
 
-</div>
 
+        <section class="module-grid">
 
 
+            <div class="module-card">
 
+                <h3>🧪 Tests</h3>
 
+                <p>
 
+                    Medical Test তথ্য যোগ ও পরিচালনা করুন।
 
-<!-- Departments -->
+                </p>
 
-<div class="card">
+                <a
 
+                    href="test.html"
 
-<h3>
-🏬 Departments
-</h3>
+                    class="open-btn"
 
+                >
 
-<p>
-Medical Department Management
-</p>
+                    Open
 
+                </a>
 
-<a class="btn" href="departments.html">
+            </div>
 
-Open
 
-</a>
+            <div class="module-card">
 
+                <h3>💰 Test Prices</h3>
 
-</div>
+                <p>
 
+                    বিভিন্ন Diagnostic Center-এর Test Price পরিচালনা করুন।
 
+                </p>
 
+                <a
 
+                    href="test-prices.html"
 
+                    class="open-btn"
 
+                >
 
-<!-- Settings -->
+                    Open
 
-<div class="card">
+                </a>
 
+            </div>
 
-<h3>
-⚙️ Settings
-</h3>
 
+            <div class="module-card">
 
-<p>
-Website Settings
-</p>
+                <h3>📂 Categories</h3>
 
+                <p>
 
-<a class="btn" href="setting.html">
+                    Test Category পরিচালনা করুন।
 
-Open
+                </p>
 
-</a>
+                <a
 
+                    href="categories.html"
 
-</div>
+                    class="open-btn"
 
+                >
 
+                    Open
 
+                </a>
 
+            </div>
 
 
+            <div class="module-card">
 
-<!-- Logout -->
+                <h3>🏥 Hospitals</h3>
 
+                <p>
 
-<div class="card">
+                    Hospital তথ্য পরিচালনা করুন।
 
+                </p>
 
-<h3>
-🚪 Logout
-</h3>
+                <a
 
+                    href="hospitals.html"
 
-<p>
-Admin Account Logout
-</p>
+                    class="open-btn"
 
+                >
 
-<a class="btn logout" href="login.html">
+                    Open
 
-Logout
+                </a>
 
-</a>
+            </div>
 
 
-</div>
+            <div class="module-card">
 
+                <h3>🔬 Diagnostic Centers</h3>
 
+                <p>
 
+                    Diagnostic Center পরিচালনা করুন।
 
+                </p>
 
+                <a
 
-</div>
+                    href="diagnostic-centers.html"
 
+                    class="open-btn"
 
-</div>
+                >
 
+                    Open
 
+                </a>
 
+            </div>
 
 
+            <div class="module-card">
 
+                <h3>🦠 Diseases</h3>
 
+                <p>
 
+                    Disease Information পরিচালনা করুন।
 
-<footer>
+                </p>
 
-© 2026 MediTest BD Admin Panel
+                <a
 
-</footer>
+                    href="diseases.html"
 
+                    class="open-btn"
 
+                >
 
+                    Open
 
+                </a>
 
+            </div>
 
-<script type="module">
 
+            <div class="module-card">
 
-import { auth } from "../firebase.js";
+                <h3>👨‍⚕️ Doctor Guides</h3>
 
+                <p>
 
-import {
+                    Doctor Guide Content পরিচালনা করুন।
 
-onAuthStateChanged,
-signOut
+                </p>
 
-}
+                <a
 
-from
+                    href="doctor-guides.html"
 
-"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+                    class="open-btn"
 
+                >
 
+                    Open
 
+                </a>
 
+            </div>
 
-// Check Login
 
+            <div class="module-card">
 
-onAuthStateChanged(auth,(user)=>{
+                <h3>🏬 Departments</h3>
 
+                <p>
 
-if(!user){
+                    Medical Department পরিচালনা করুন।
 
+                </p>
 
-window.location.href="login.html";
+                <a
 
+                    href="departments.html"
 
-}
+                    class="open-btn"
 
+                >
 
-});
+                    Open
 
+                </a>
 
+            </div>
 
 
+            <div class="module-card">
 
+                <h3>⚙️ Settings</h3>
 
+                <p>
 
-// Logout
+                    Website Settings পরিচালনা করুন।
 
+                </p>
 
-window.logout=function(){
+                <a
 
+                    href="setting.html"
 
-signOut(auth).then(()=>{
+                    class="open-btn"
 
+                >
 
-window.location.href="login.html";
+                    Open
 
+                </a>
 
-});
+            </div>
 
 
-}
+        </section>
 
 
+    </main>
 
 
 
-</script>
+    <footer>
 
+        © 2026 MediTest BD Admin Panel
 
+    </footer>
+
+
+
+    <!-- IMPORTANT -->
+
+    <script
+
+        type="module"
+
+        src="dashboard.js"
+
+    ></script>
 
 
 </body>
