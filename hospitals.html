@@ -1,1 +1,278 @@
+<!DOCTYPE html>
+<html lang="bn">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MediTest BD - বাংলাদেশের হাসপাতালের তথ্য, ঠিকানা ও যোগাযোগের তথ্য"
+    >
+
+    <title>
+        হাসপাতালসমূহ | MediTest BD
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Header -->
+
+    <header id="header">
+
+        <div class="site-header">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                🩺 MediTest BD
+
+            </a>
+
+
+            <button
+                id="menuButton"
+                class="menu-button"
+                type="button"
+                aria-label="মেনু খুলুন"
+            >
+
+                ☰
+
+            </button>
+
+
+            <nav
+                id="mainNav"
+                class="main-nav"
+            >
+
+                <a href="index.html">
+                    হোম
+                </a>
+
+                <a href="tests.html">
+                    টেস্টসমূহ
+                </a>
+
+                <a href="diseases.html">
+                    রোগসমূহ
+                </a>
+
+                <a
+                    href="hospitals.html"
+                    class="active"
+                >
+                    হাসপাতাল
+                </a>
+
+                <a href="diagnostic-centers.html">
+                    ডায়াগনস্টিক সেন্টার
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main class="page-container">
+
+
+        <!-- Page Hero -->
+
+        <section class="page-hero">
+
+            <h1>
+                🏥 হাসপাতালসমূহ
+            </h1>
+
+
+            <p>
+                হাসপাতালের নাম, অবস্থান ও যোগাযোগের তথ্য খুঁজে দেখুন।
+            </p>
+
+        </section>
+
+
+        <!-- Search -->
+
+        <section class="search-section">
+
+            <label
+                for="hospitalSearchInput"
+                class="sr-only"
+            >
+
+                হাসপাতাল সার্চ করুন
+
+            </label>
+
+
+            <input
+                type="search"
+                id="hospitalSearchInput"
+                placeholder="🔍 হাসপাতালের নাম, শহর বা এলাকা লিখুন..."
+                autocomplete="off"
+            >
+
+
+            <button
+                id="clearHospitalSearchButton"
+                type="button"
+                class="clear-search-button"
+            >
+
+                পরিষ্কার
+
+            </button>
+
+        </section>
+
+
+        <!-- City Filter -->
+
+        <section class="filter-section">
+
+            <label
+                for="hospitalCityFilter"
+            >
+
+                শহর:
+
+            </label>
+
+
+            <select
+                id="hospitalCityFilter"
+            >
+
+                <option value="all">
+                    সকল শহর
+                </option>
+
+            </select>
+
+        </section>
+
+
+        <!-- Result Information -->
+
+        <div
+            id="hospitalResultInfo"
+            class="result-info"
+        >
+
+            হাসপাতালের তথ্য লোড হচ্ছে...
+
+        </div>
+
+
+        <!-- Hospital List -->
+
+        <section
+            id="hospitalList"
+            class="hospital-grid"
+            aria-live="polite"
+        >
+
+            <div class="loading-box">
+
+                ⏳ হাসপাতালের তথ্য লোড হচ্ছে...
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer id="footer">
+
+        <div class="footer-content">
+
+            <p>
+                © 2026 MediTest BD
+            </p>
+
+
+            <p>
+                মেডিকেল তথ্যভিত্তিক প্ল্যাটফর্ম
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Mobile Menu -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById(
+                "menuButton"
+            );
+
+
+        const mainNav =
+            document.getElementById(
+                "mainNav"
+            );
+
+
+        if (
+            menuButton &&
+            mainNav
+        ) {
+
+            menuButton.addEventListener(
+                "click",
+                () => {
+
+                    mainNav.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+    <!-- Page JavaScript -->
+
+    <script
+        type="module"
+        src="js/hospitals.js"
+    ></script>
+
+
+</body>
+
+</html>
