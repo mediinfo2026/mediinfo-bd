@@ -1,1 +1,266 @@
+<!DOCTYPE html>
+<html lang="bn">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MediTest BD - রোগ ও স্বাস্থ্যবিষয়ক ডাক্তার গাইড"
+    >
+
+    <title>
+        ডাক্তার গাইড | MediTest BD
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Header -->
+
+    <header id="header">
+
+        <div class="site-header">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                🩺 MediTest BD
+
+            </a>
+
+
+            <button
+                id="menuButton"
+                class="menu-button"
+                type="button"
+                aria-label="মেনু খুলুন"
+            >
+
+                ☰
+
+            </button>
+
+
+            <nav
+                id="mainNav"
+                class="main-nav"
+            >
+
+                <a href="index.html">
+                    হোম
+                </a>
+
+
+                <a href="tests.html">
+                    টেস্টসমূহ
+                </a>
+
+
+                <a href="diseases.html">
+                    রোগসমূহ
+                </a>
+
+
+                <a href="hospitals.html">
+                    হাসপাতাল
+                </a>
+
+
+                <a href="diagnostic-centers.html">
+                    ডায়াগনস্টিক সেন্টার
+                </a>
+
+
+                <a href="departments.html">
+                    বিভাগসমূহ
+                </a>
+
+
+                <a
+                    href="doctor-guides.html"
+                    class="active"
+                >
+                    ডাক্তার গাইড
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main class="page-container">
+
+
+        <!-- Page Hero -->
+
+        <section class="page-hero">
+
+            <h1>
+                👨‍⚕️ ডাক্তার গাইড
+            </h1>
+
+
+            <p>
+                বিভিন্ন রোগ ও স্বাস্থ্যসমস্যা সম্পর্কে প্রয়োজনীয় তথ্য জানুন।
+            </p>
+
+        </section>
+
+
+        <!-- Search -->
+
+        <section class="search-section">
+
+            <label
+                for="doctorGuideSearchInput"
+                class="sr-only"
+            >
+
+                ডাক্তার গাইড সার্চ করুন
+
+            </label>
+
+
+            <input
+                type="search"
+                id="doctorGuideSearchInput"
+                placeholder="🔍 গাইডের নাম, রোগ বা কীওয়ার্ড লিখুন..."
+                autocomplete="off"
+            >
+
+
+            <button
+                id="clearDoctorGuideSearchButton"
+                type="button"
+                class="clear-search-button"
+            >
+
+                পরিষ্কার
+
+            </button>
+
+        </section>
+
+
+        <!-- Result Information -->
+
+        <div
+            id="doctorGuideResultInfo"
+            class="result-info"
+        >
+
+            ডাক্তার গাইডের তথ্য লোড হচ্ছে...
+
+        </div>
+
+
+        <!-- Guide List -->
+
+        <section
+            id="doctorGuideList"
+            class="doctor-guide-grid"
+            aria-live="polite"
+        >
+
+            <div class="loading-box">
+
+                ⏳ ডাক্তার গাইড লোড হচ্ছে...
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer id="footer">
+
+        <div class="footer-content">
+
+            <p>
+                © 2026 MediTest BD
+            </p>
+
+
+            <p>
+                মেডিকেল তথ্যভিত্তিক প্ল্যাটফর্ম
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Mobile Menu -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById(
+                "menuButton"
+            );
+
+
+        const mainNav =
+            document.getElementById(
+                "mainNav"
+            );
+
+
+        if (
+            menuButton &&
+            mainNav
+        ) {
+
+            menuButton.addEventListener(
+                "click",
+                () => {
+
+                    mainNav.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+    <!-- Page JavaScript -->
+
+    <script
+        type="module"
+        src="js/doctor-guides.js"
+    ></script>
+
+
+</body>
+
+</html>
