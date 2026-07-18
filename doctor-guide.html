@@ -1,1 +1,236 @@
+<!DOCTYPE html>
+<html lang="bn">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MediTest BD - ডাক্তার গাইডের বিস্তারিত তথ্য"
+    >
+
+    <title>
+        ডাক্তার গাইড | MediTest BD
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Header -->
+
+    <header id="header">
+
+        <div class="site-header">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                🩺 MediTest BD
+
+            </a>
+
+
+            <button
+                id="menuButton"
+                class="menu-button"
+                type="button"
+                aria-label="মেনু খুলুন"
+            >
+
+                ☰
+
+            </button>
+
+
+            <nav
+                id="mainNav"
+                class="main-nav"
+            >
+
+                <a href="index.html">
+                    হোম
+                </a>
+
+
+                <a href="tests.html">
+                    টেস্টসমূহ
+                </a>
+
+
+                <a href="diseases.html">
+                    রোগসমূহ
+                </a>
+
+
+                <a href="hospitals.html">
+                    হাসপাতাল
+                </a>
+
+
+                <a href="diagnostic-centers.html">
+                    ডায়াগনস্টিক সেন্টার
+                </a>
+
+
+                <a href="departments.html">
+                    বিভাগসমূহ
+                </a>
+
+
+                <a
+                    href="doctor-guides.html"
+                    class="active"
+                >
+                    ডাক্তার গাইড
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main class="page-container">
+
+
+        <!-- Breadcrumb -->
+
+        <nav
+            class="breadcrumb"
+            aria-label="Breadcrumb"
+        >
+
+            <a href="index.html">
+                হোম
+            </a>
+
+
+            <span>
+                /
+            </span>
+
+
+            <a href="doctor-guides.html">
+                ডাক্তার গাইড
+            </a>
+
+
+            <span>
+                /
+            </span>
+
+
+            <span id="breadcrumbGuideName">
+                বিস্তারিত
+            </span>
+
+        </nav>
+
+
+        <!-- Doctor Guide Details -->
+
+        <section
+            id="doctorGuideDetails"
+            class="details-container"
+        >
+
+            <div class="loading-box">
+
+                ⏳ ডাক্তার গাইড লোড হচ্ছে...
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer id="footer">
+
+        <div class="footer-content">
+
+            <p>
+                © 2026 MediTest BD
+            </p>
+
+
+            <p>
+                মেডিকেল তথ্যভিত্তিক প্ল্যাটফর্ম
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Mobile Menu -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById(
+                "menuButton"
+            );
+
+
+        const mainNav =
+            document.getElementById(
+                "mainNav"
+            );
+
+
+        if (
+            menuButton &&
+            mainNav
+        ) {
+
+            menuButton.addEventListener(
+                "click",
+                () => {
+
+                    mainNav.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+    <!-- Page JavaScript -->
+
+    <script
+        type="module"
+        src="js/doctor-guide.js"
+    ></script>
+
+
+</body>
+
+</html>
