@@ -1,1 +1,261 @@
+<!DOCTYPE html>
+<html lang="bn">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MediTest BD - বিভিন্ন মেডিকেল বিভাগ ও চিকিৎসা বিশেষত্ব সম্পর্কে তথ্য"
+    >
+
+    <title>
+        মেডিকেল বিভাগসমূহ | MediTest BD
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Header -->
+
+    <header id="header">
+
+        <div class="site-header">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                🩺 MediTest BD
+
+            </a>
+
+
+            <button
+                id="menuButton"
+                class="menu-button"
+                type="button"
+                aria-label="মেনু খুলুন"
+            >
+
+                ☰
+
+            </button>
+
+
+            <nav
+                id="mainNav"
+                class="main-nav"
+            >
+
+                <a href="index.html">
+                    হোম
+                </a>
+
+
+                <a href="tests.html">
+                    টেস্টসমূহ
+                </a>
+
+
+                <a href="diseases.html">
+                    রোগসমূহ
+                </a>
+
+
+                <a href="hospitals.html">
+                    হাসপাতাল
+                </a>
+
+
+                <a href="diagnostic-centers.html">
+                    ডায়াগনস্টিক সেন্টার
+                </a>
+
+
+                <a
+                    href="departments.html"
+                    class="active"
+                >
+                    বিভাগসমূহ
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main class="page-container">
+
+
+        <!-- Page Hero -->
+
+        <section class="page-hero">
+
+            <h1>
+                🏥 মেডিকেল বিভাগসমূহ
+            </h1>
+
+
+            <p>
+                বিভিন্ন চিকিৎসা বিভাগ ও বিশেষত্ব সম্পর্কে তথ্য খুঁজে দেখুন।
+            </p>
+
+        </section>
+
+
+        <!-- Search -->
+
+        <section class="search-section">
+
+            <label
+                for="departmentSearchInput"
+                class="sr-only"
+            >
+
+                বিভাগ সার্চ করুন
+
+            </label>
+
+
+            <input
+                type="search"
+                id="departmentSearchInput"
+                placeholder="🔍 বিভাগের নাম বা কীওয়ার্ড লিখুন..."
+                autocomplete="off"
+            >
+
+
+            <button
+                id="clearDepartmentSearchButton"
+                type="button"
+                class="clear-search-button"
+            >
+
+                পরিষ্কার
+
+            </button>
+
+        </section>
+
+
+        <!-- Result Information -->
+
+        <div
+            id="departmentResultInfo"
+            class="result-info"
+        >
+
+            বিভাগের তথ্য লোড হচ্ছে...
+
+        </div>
+
+
+        <!-- Department List -->
+
+        <section
+            id="departmentList"
+            class="department-grid"
+            aria-live="polite"
+        >
+
+            <div class="loading-box">
+
+                ⏳ বিভাগের তথ্য লোড হচ্ছে...
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer id="footer">
+
+        <div class="footer-content">
+
+            <p>
+                © 2026 MediTest BD
+            </p>
+
+
+            <p>
+                মেডিকেল তথ্যভিত্তিক প্ল্যাটফর্ম
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Mobile Menu -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById(
+                "menuButton"
+            );
+
+
+        const mainNav =
+            document.getElementById(
+                "mainNav"
+            );
+
+
+        if (
+            menuButton &&
+            mainNav
+        ) {
+
+            menuButton.addEventListener(
+                "click",
+                () => {
+
+                    mainNav.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+    <!-- Page JavaScript -->
+
+    <script
+        type="module"
+        src="js/departments.js"
+    ></script>
+
+
+</body>
+
+</html>
