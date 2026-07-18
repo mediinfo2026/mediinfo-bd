@@ -1,0 +1,15 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "diagnostic_prices",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "testSlug",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
