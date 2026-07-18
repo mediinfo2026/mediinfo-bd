@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MediTest BD - সকল মেডিকেল তথ্য সার্চ করুন"
+    >
+
+    <title>
+        সার্চ | MediTest BD
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Header -->
+
+    <header id="header">
+
+        <div class="site-header">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                🩺 MediTest BD
+
+            </a>
+
+
+            <button
+                id="menuButton"
+                class="menu-button"
+                type="button"
+                aria-label="মেনু খুলুন"
+            >
+
+                ☰
+
+            </button>
+
+
+            <nav
+                id="mainNav"
+                class="main-nav"
+            >
+
+                <a href="index.html">
+                    হোম
+                </a>
+
+
+                <a href="tests.html">
+                    টেস্টসমূহ
+                </a>
+
+
+                <a href="diseases.html">
+                    রোগসমূহ
+                </a>
+
+
+                <a href="hospitals.html">
+                    হাসপাতাল
+                </a>
+
+
+                <a href="diagnostic-centers.html">
+                    ডায়াগনস্টিক সেন্টার
+                </a>
+
+
+                <a href="departments.html">
+                    বিভাগসমূহ
+                </a>
+
+
+                <a href="doctor-guides.html">
+                    ডাক্তার গাইড
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main class="page-container">
+
+
+        <!-- Search Hero -->
+
+        <section class="page-hero">
+
+            <h1>
+                🔍 সার্চ করুন
+            </h1>
+
+
+            <p>
+                টেস্ট, রোগ, হাসপাতাল, ডায়াগনস্টিক সেন্টার ও অন্যান্য তথ্য খুঁজে দেখুন।
+            </p>
+
+        </section>
+
+
+        <!-- Search Box -->
+
+        <section class="global-search-section">
+
+            <form
+                id="globalSearchForm"
+                role="search"
+            >
+
+                <label
+                    for="globalSearchInput"
+                    class="sr-only"
+                >
+
+                    কী খুঁজছেন?
+
+                </label>
+
+
+                <input
+                    type="search"
+                    id="globalSearchInput"
+                    placeholder="🔍 টেস্ট, রোগ, হাসপাতাল বা অন্য কিছু লিখুন..."
+                    autocomplete="off"
+                    autofocus
+                >
+
+
+                <button
+                    type="submit"
+                    class="search-button"
+                >
+
+                    🔍 সার্চ
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="clearGlobalSearchButton"
+                    class="clear-search-button"
+                >
+
+                    পরিষ্কার
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- Search Result Information -->
+
+        <div
+            id="globalSearchResultInfo"
+            class="result-info"
+        >
+
+            সার্চ করার জন্য কিছু লিখুন।
+
+        </div>
+
+
+        <!-- Search Results -->
+
+        <section
+            id="globalSearchResults"
+            class="search-results"
+            aria-live="polite"
+        >
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer id="footer">
+
+        <div class="footer-content">
+
+            <p>
+                © 2026 MediTest BD
+            </p>
+
+
+            <p>
+                মেডিকেল তথ্যভিত্তিক প্ল্যাটফর্ম
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Mobile Menu -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById(
+                "menuButton"
+            );
+
+
+        const mainNav =
+            document.getElementById(
+                "mainNav"
+            );
+
+
+        if (
+            menuButton &&
+            mainNav
+        ) {
+
+            menuButton.addEventListener(
+                "click",
+                () => {
+
+                    mainNav.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+    <!-- Page JavaScript -->
+
+    <script
+        type="module"
+        src="js/search.js"
+    ></script>
+
+
+</body>
+
+</html>
