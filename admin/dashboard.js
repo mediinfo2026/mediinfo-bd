@@ -1,13 +1,24 @@
 // admin/dashboard.js
 
 
-import { db, auth } from "../firebase.js";
+
+import {
+
+    db,
+
+    auth
+
+}
+
+from "../firebase.js";
+
 
 
 import {
 
-collection,
-getDocs
+    collection,
+
+    getDocs
 
 }
 
@@ -19,8 +30,9 @@ from
 
 import {
 
-onAuthStateChanged,
-signOut
+    onAuthStateChanged,
+
+    signOut
 
 }
 
@@ -32,215 +44,125 @@ from
 
 
 
+// =====================================
+// LOGIN PROTECTION
+// =====================================
 
 
+let currentUser = null;
 
-// Check Admin Login
 
+onAuthStateChanged(
 
-onAuthStateChanged(auth,(user)=>{
+    auth,
 
+    (user) => {
 
 
-if(!user){
+        if (!user) {
 
 
-window.location.href="login.html";
+            // Login করা না থাকলে Login Page-এ পাঠাবে
 
+            window.location.replace(
 
-}
+                "login.html"
 
+            );
 
-});
 
+            return;
 
+        }
 
 
+        // Current User Save
 
+        currentUser = user;
 
 
+        // Email দেখানো
 
+        const emailElement =
 
-// Count Collection
+            document.getElementById(
 
+                "adminEmail"
 
-async function getCount(collectionName){
+            );
 
 
+        if (emailElement) {
 
-try{
+            emailElement.textContent =
 
+                user.email;
 
-const snapshot =
+        }
 
-await getDocs(
 
-collection(
-db,
-collectionName
-)
+        // Dashboard Data Load
 
-);
+        loadDashboard();
 
+    }
 
-
-return snapshot.size;
-
-
-
-}
-
-
-catch(error){
-
-
-console.log(error);
-
-
-return 0;
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// Load Dashboard Statistics
-
-
-async function loadDashboard(){
-
-
-
-const tests =
-
-await getCount(
-"tests"
-);
-
-
-
-const prices =
-
-await getCount(
-"diagnostic_prices"
-);
-
-
-
-const hospitals =
-
-await getCount(
-"hospitals"
-);
-
-
-
-const centers =
-
-await getCount(
-"diagnostic_centers"
-);
-
-
-
-const diseases =
-
-await getCount(
-"diseases"
-);
-
-
-
-const guides =
-
-await getCount(
-"doctor_guides"
-);
-
-
-
-const departments =
-
-await getCount(
-"departments"
 );
 
 
 
 
 
+// =====================================
+// GET COLLECTION COUNT
+// =====================================
 
 
-if(document.getElementById("totalTests"))
+async function getCollectionCount(
 
-document.getElementById("totalTests").innerHTML =
-tests;
+    collectionName
 
-
-
+) {
 
 
-if(document.getElementById("totalPrices"))
-
-document.getElementById("totalPrices").innerHTML =
-prices;
+    try {
 
 
+        const snapshot =
+
+            await getDocs(
+
+                collection(
+
+                    db,
+
+                    collectionName
+
+                )
+
+            );
 
 
-
-if(document.getElementById("totalHospitals"))
-
-document.getElementById("totalHospitals").innerHTML =
-hospitals;
+        return snapshot.size;
 
 
+    }
+
+    catch (error) {
 
 
+        console.error(
 
-if(document.getElementById("totalCenters"))
+            `Error loading ${collectionName}:`,
 
-document.getElementById("totalCenters").innerHTML =
-centers;
+            error
 
-
-
-
-
-if(document.getElementById("totalDiseases"))
-
-document.getElementById("totalDiseases").innerHTML =
-diseases;
+        );
 
 
+        return 0;
 
-
-
-if(document.getElementById("totalGuides"))
-
-document.getElementById("totalGuides").innerHTML =
-guides;
-
-
-
-
-
-if(document.getElementById("totalDepartments"))
-
-document.getElementById("totalDepartments").innerHTML =
-departments;
-
-
+    }
 
 }
 
@@ -248,52 +170,326 @@ departments;
 
 
 
+// =====================================
+// LOAD DASHBOARD STATISTICS
+// =====================================
+
+
+async function loadDashboard() {
+
+
+    try {
+
+
+        const [
+
+            tests,
+
+            prices,
+
+            hospitals,
+
+            centers,
+
+            diseases,
+
+            guides,
+
+            departments,
+
+            categories
+
+        ] = await Promise.all([
+
+
+            getCollectionCount(
+
+                "tests"
+
+            ),
+
+
+            getCollectionCount(
+
+                "diagnostic_prices"
+
+            ),
+
+
+            getCollectionCount(
+
+                "hospitals"
+
+            ),
+
+
+            getCollectionCount(
+
+                "diagnostic_centers"
+
+            ),
+
+
+            getCollectionCount(
+
+                "diseases"
+
+            ),
+
+
+            getCollectionCount(
+
+                "doctor_guides"
+
+            ),
+
+
+            getCollectionCount(
+
+                "departments"
+
+            ),
+
+
+            getCollectionCount(
+
+                "categories"
+
+            )
+
+
+        ]);
 
 
 
+        // Update Statistics
 
-// Logout Function
+        setNumber(
 
+            "totalTests",
 
-window.adminLogout = async function(){
+            tests
 
-
-
-try{
-
-
-await signOut(auth);
+        );
 
 
+        setNumber(
 
-window.location.href =
-"login.html";
+            "totalPrices",
+
+            prices
+
+        );
 
 
+        setNumber(
+
+            "totalHospitals",
+
+            hospitals
+
+        );
+
+
+        setNumber(
+
+            "totalCenters",
+
+            centers
+
+        );
+
+
+        setNumber(
+
+            "totalDiseases",
+
+            diseases
+
+        );
+
+
+        setNumber(
+
+            "totalGuides",
+
+            guides
+
+        );
+
+
+        setNumber(
+
+            "totalDepartments",
+
+            departments
+
+        );
+
+
+        setNumber(
+
+            "totalCategories",
+
+            categories
+
+        );
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+
+            "Dashboard Loading Error:",
+
+            error
+
+        );
+
+
+    }
 
 }
 
-catch(error){
 
 
-console.log(error);
 
+
+// =====================================
+// SET NUMBER
+// =====================================
+
+
+function setNumber(
+
+    elementId,
+
+    number
+
+) {
+
+
+    const element =
+
+        document.getElementById(
+
+            elementId
+
+        );
+
+
+    if (element) {
+
+
+        element.textContent =
+
+            Number(number).toLocaleString(
+
+                "bn-BD"
+
+            );
+
+    }
 
 }
 
 
 
+
+
+// =====================================
+// LOGOUT
+// =====================================
+
+
+async function logoutAdmin() {
+
+
+    try {
+
+
+        const confirmLogout =
+
+            confirm(
+
+                "আপনি কি Logout করতে চান?"
+
+            );
+
+
+        if (!confirmLogout) {
+
+
+            return;
+
+        }
+
+
+        // Firebase থেকে সত্যিকারের Logout
+
+        await signOut(auth);
+
+
+        // Login Page-এ পাঠানো
+
+        window.location.replace(
+
+            "login.html"
+
+        );
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+
+            "Logout Error:",
+
+            error
+
+        );
+
+
+        alert(
+
+            "Logout করা যায়নি। আবার চেষ্টা করুন।"
+
+        );
+
+    }
+
 }
 
 
 
 
 
+// Logout Button-এর সাথে Function যুক্ত
+
+const logoutButton =
+
+    document.getElementById(
+
+        "logoutBtn"
+
+    );
 
 
+if (logoutButton) {
 
 
-// Start Dashboard
+    logoutButton.addEventListener(
 
+        "click",
 
-loadDashboard();
+        logoutAdmin
+
+    );
+
+}
