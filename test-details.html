@@ -1,1 +1,249 @@
+<!DOCTYPE html>
+<html lang="bn">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MediTest BD - মেডিকেল টেস্টের বিস্তারিত তথ্য"
+    >
+
+    <title>
+        Test Details | MediTest BD
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Header -->
+
+    <header id="header">
+
+        <div class="site-header">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                🩺 MediTest BD
+
+            </a>
+
+
+            <button
+                id="menuButton"
+                class="menu-button"
+                type="button"
+                aria-label="মেনু খুলুন"
+            >
+
+                ☰
+
+            </button>
+
+
+            <nav
+                id="mainNav"
+                class="main-nav"
+            >
+
+                <a href="index.html">
+                    হোম
+                </a>
+
+                <a
+                    href="tests.html"
+                    class="active"
+                >
+                    টেস্টসমূহ
+                </a>
+
+                <a href="diseases.html">
+                    রোগসমূহ
+                </a>
+
+                <a href="hospitals.html">
+                    হাসপাতাল
+                </a>
+
+                <a href="diagnostic-centers.html">
+                    ডায়াগনস্টিক সেন্টার
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main -->
+
+    <main class="page-container">
+
+
+        <!-- Breadcrumb -->
+
+        <nav
+            class="breadcrumb"
+            aria-label="Breadcrumb"
+        >
+
+            <a href="index.html">
+                হোম
+            </a>
+
+            <span>
+                /
+            </span>
+
+            <a href="tests.html">
+                টেস্টসমূহ
+            </a>
+
+            <span>
+                /
+            </span>
+
+            <span id="breadcrumbTestName">
+                বিস্তারিত
+            </span>
+
+        </nav>
+
+
+        <!-- Test Details -->
+
+        <section
+            id="testDetails"
+            class="details-container"
+        >
+
+            <div class="loading-box">
+
+                ⏳ তথ্য লোড হচ্ছে...
+
+            </div>
+
+        </section>
+
+
+        <!-- Diagnostic Prices -->
+
+        <section
+            id="diagnosticPricesSection"
+            class="details-section"
+        >
+
+            <div class="section-heading">
+
+                <h2>
+                    💰 বিভিন্ন ডায়াগনস্টিক সেন্টারের মূল্য
+                </h2>
+
+            </div>
+
+
+            <div
+                id="diagnosticPrices"
+                class="price-grid"
+            >
+
+                <div class="loading-box">
+
+                    ⏳ মূল্য লোড হচ্ছে...
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer id="footer">
+
+        <div class="footer-content">
+
+            <p>
+                © 2026 MediTest BD
+            </p>
+
+            <p>
+                মেডিকেল টেস্ট সম্পর্কে তথ্যভিত্তিক প্ল্যাটফর্ম
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Mobile Menu -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById(
+                "menuButton"
+            );
+
+
+        const mainNav =
+            document.getElementById(
+                "mainNav"
+            );
+
+
+        if (
+            menuButton &&
+            mainNav
+        ) {
+
+            menuButton.addEventListener(
+                "click",
+                () => {
+
+                    mainNav.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+    <!-- Page JavaScript -->
+
+    <script
+        type="module"
+        src="js/test-details.js"
+    ></script>
+
+
+</body>
+
+</html>
