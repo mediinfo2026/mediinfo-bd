@@ -1,0 +1,112 @@
+rules_version = '2';
+
+service cloud.firestore {
+
+    match /databases/{database}/documents {
+
+
+        // =====================================
+        // Public Read Collections
+        // =====================================
+
+        match /tests/{document} {
+
+            allow read: if true;
+
+            allow write: if false;
+
+        }
+
+
+        match /categories/{document} {
+
+            allow read: if true;
+
+            allow write: if false;
+
+        }
+
+
+        match /diseases/{document} {
+
+            allow read: if true;
+
+            allow write: if false;
+
+        }
+
+
+        match /hospitals/{document} {
+
+            allow read: if true;
+
+            allow write: if false;
+
+        }
+
+
+        match /diagnostic_centers/{document} {
+
+            allow read: if true;
+
+            allow write: if false;
+
+        }
+
+
+        match /departments/{document} {
+
+            allow read: if true;
+
+            allow write: if false;
+
+        }
+
+
+        match /doctor_guides/{document} {
+
+            allow read: if true;
+
+            allow write: if false;
+
+        }
+
+
+        match /diagnostic_prices/{document} {
+
+            allow read: if true;
+
+            allow write: if false;
+
+        }
+
+
+        // =====================================
+        // Contact Messages
+        // =====================================
+
+        match /contact_messages/{document} {
+
+            allow create: if true;
+
+            allow read,
+                  update,
+                  delete: if false;
+
+        }
+
+
+        // =====================================
+        // Default Deny
+        // =====================================
+
+        match /{document=**} {
+
+            allow read,
+                  write: if false;
+
+        }
+
+    }
+
+}
