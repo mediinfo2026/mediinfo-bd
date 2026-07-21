@@ -2,1556 +2,468 @@
 <html lang="bn">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>Tests Manager | MediInfo BD</title>
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
 
-<title>Tests Manager | MediInfo BD</title>
-
-<link rel="stylesheet" href="../style.css">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#f5f7fb;
-}
-
-header{
-
-background:#1565c0;
-
-color:#fff;
-
-padding:18px;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-}
-
-header h2{
-
-font-size:24px;
-
-}
-
-header a{
-
-color:#fff;
-
-text-decoration:none;
-
-font-weight:bold;
-
-}
-
-.container{
-
-width:95%;
-
-max-width:1200px;
-
-margin:25px auto;
-
-}
-
-.topBar{
-
-display:flex;
-
-gap:10px;
-
-flex-wrap:wrap;
-
-margin-bottom:20px;
-
-}
-
-.topBar input{
-
-flex:1;
-
-padding:12px;
-
-border:1px solid #ccc;
-
-border-radius:8px;
-
-font-size:16px;
-
-}
-
-.topBar button{
-
-padding:12px 20px;
-
-background:#1565c0;
-
-color:#fff;
-
-border:none;
-
-border-radius:8px;
-
-cursor:pointer;
-
-}
-
-.topBar button:hover{
-
-background:#0d47a1;
-
-}
-
-table{
-
-width:100%;
-
-border-collapse:collapse;
-
-background:#fff;
-
-box-shadow:0 2px 10px rgba(0,0,0,.08);
-
-}
-
-thead{
-
-background:#1565c0;
-
-color:#fff;
-
-}
-
-th{
-
-padding:14px;
-
-text-align:left;
-
-}
-
-td{
-
-padding:14px;
-
-border-bottom:1px solid #eee;
-
-}
-
-.actionBtn{
-
-padding:8px 12px;
-
-border:none;
-
-border-radius:6px;
-
-cursor:pointer;
-
-margin-right:6px;
-
-}
-
-.edit{
-
-background:#43a047;
-
-color:white;
-
-}
-
-.delete{
-
-background:#d32f2f;
-
-color:white;
-
-}
-
-.loading{
-
-text-align:center;
-
-padding:40px;
-
-font-size:18px;
-
-display:none;
-
-}
-
-.empty{
-
-padding:30px;
-
-text-align:center;
-
-display:none;
-
-font-size:18px;
-
-color:#777;
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-
-<h2>🧪 Test Manager</h2>
-
-<a href="dashboard.html">⬅ Dashboard</a>
-
-</header>
-
-<div class="container">
-
-<div class="topBar">
-
-<input
-type="text"
-id="searchInput"
-placeholder="Search Test..."
->
-
-<button id="addBtn">
-
-+ Add Test
-
-</button>
-
-</div>
-<!-- Table -->
-
-<table>
-
-<thead>
-
-<tr>
-
-<th width="60">#</th>
-
-<th>Test Name</th>
-
-<th>Category</th>
-
-<th>Department</th>
-
-<th>Sample</th>
-
-<th width="180">Action</th>
-
-</tr>
-
-</thead>
-
-<tbody id="tableBody">
-
-</tbody>
-
-</table>
-
-<div id="loading" class="loading">
-
-Loading...
-
-</div>
-
-<div id="empty" class="empty">
-
-No Test Found
-
-</div>
-
-<!-- Add / Edit Modal -->
-
-<div id="modal" class="modal">
-
-<div class="modal-content">
-
-<h2 id="modalTitle">
-
-Add Test
-
-</h2>
-
-<form id="testForm">
-
-<input
-type="hidden"
-id="docId"
->
-
-<div class="form-group">
-
-<label>
-
-Test Name
-
-</label>
-
-<input
-type="text"
-id="name"
-required
->
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Slug
-
-</label>
-
-<input
-type="text"
-id="slug"
-required
->
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Category
-
-</label>
-
-<input
-type="text"
-id="category"
-required
->
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Department
-
-</label>
-
-<input
-type="text"
-id="department"
-required
->
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Sample
-
-</label>
-
-<input
-type="text"
-id="sample"
-required
->
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Price
-
-</label>
-
-<input
-type="number"
-id="price"
-required
->
-
-</div>
-<div class="form-group">
-
-<label>
-
-Description
-
-</label>
-
-<textarea
-id="description"
-rows="4">
-</textarea>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Preparation
-
-</label>
-
-<textarea
-id="preparation"
-rows="3">
-</textarea>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Report Time
-
-</label>
-
-<input
-type="text"
-id="reportTime"
-placeholder="যেমন: 24 Hours"
->
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Normal Range
-
-</label>
-
-<textarea
-id="normalRange"
-rows="3">
-</textarea>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Purpose
-
-</label>
-
-<textarea
-id="purpose"
-rows="4">
-</textarea>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Note
-
-</label>
-
-<textarea
-id="note"
-rows="3">
-</textarea>
-
-</div>
-
-<div class="modal-buttons">
-
-<button
-type="submit"
-class="saveBtn">
-
-Save Test
-
-</button>
-
-<button
-type="button"
-class="cancelBtn"
-id="closeModal">
-
-Cancel
-
-</button>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
-// Diagnostic Center Price Load
-
-async function loadDiagnosticPrices(testSlug) {
-
-    const priceBox = document.getElementById("diagnosticPrices");
-
-    if (!priceBox) return;
-
-
-    try {
-
-        const q = query(
-            collection(db, "diagnostic_prices"),
-            where("testSlug", "==", testSlug)
-        );
-
-
-        const snapshot = await getDocs(q);
-
-
-        if (snapshot.empty) {
-
-            priceBox.innerHTML = `
-                <p class="no-data">
-                বর্তমানে কোনো ডায়াগনস্টিক সেন্টারের মূল্য পাওয়া যায়নি।
-                </p>
-            `;
-
-            return;
+    <style>
+        * {
+            box-sizing: border-box;
         }
 
+        body {
+            margin: 0;
+            background: #f4f7fb;
+            font-family: Arial, "Noto Sans Bengali", sans-serif;
+            color: #222;
+        }
 
-        let html = `
-        <h2>🏥 বিভিন্ন ডায়াগনস্টিক সেন্টারের মূল্য</h2>
-        <table class="price-table">
+        .admin-header {
+            background: #1565c0;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
 
-        <tr>
-            <th>সেন্টার</th>
-            <th>শহর</th>
-            <th>মূল্য</th>
-        </tr>
-        `;
+        .admin-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
 
+        .dashboard-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-        snapshot.forEach(doc => {
+        .page-container {
+            width: 95%;
+            max-width: 1250px;
+            margin: 25px auto;
+        }
 
-            const data = doc.data();
+        .toolbar {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
 
+        #searchInput {
+            flex: 1;
+            min-width: 220px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
 
-            html += `
+        .primary-btn {
+            border: none;
+            background: #1565c0;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
 
-            <tr>
+        .primary-btn:hover {
+            background: #0d47a1;
+        }
 
-                <td>${data.center || "-"}</td>
+        .table-wrapper {
+            background: white;
+            border-radius: 12px;
+            overflow-x: auto;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
 
-                <td>${data.city || "-"}</td>
+        table {
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+        }
 
-                <td>
-                ৳ ${data.price || "-"}
-                </td>
+        thead {
+            background: #1565c0;
+            color: white;
+        }
 
-            </tr>
+        th,
+        td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
 
-            `;
+        tbody tr:hover {
+            background: #f7faff;
+        }
 
-        });
+        .action-btn {
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 5px;
+            color: white;
+        }
 
+        .edit-btn {
+            background: #2e7d32;
+        }
 
-        html += `</table>`;
+        .delete-btn {
+            background: #c62828;
+        }
 
+        .loading,
+        .empty {
+            text-align: center;
+            padding: 35px;
+            font-size: 17px;
+        }
 
-        priceBox.innerHTML = html;
+        .hidden {
+            display: none;
+        }
 
+        /* Modal */
 
-    } catch(error){
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            z-index: 999;
+        }
 
-        console.log(
-            "Price Load Error:",
-            error
-        );
+        .modal.active {
+            display: flex;
+        }
 
+        .modal-content {
+            width: 100%;
+            max-width: 700px;
+            max-height: 92vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+        }
 
-        priceBox.innerHTML = `
-        <p>
-        মূল্য লোড করতে সমস্যা হয়েছে।
-        </p>
-        `;
+        .modal-content h2 {
+            margin-top: 0;
+            color: #1565c0;
+        }
 
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-}
-  // Test Details Load
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
 
-async function loadTestDetails(){
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
 
-    const params =
-    new URLSearchParams(window.location.search);
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
 
+        .save-btn {
+            flex: 1;
+            border: none;
+            background: #1565c0;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-    const slug =
-    params.get("slug");
+        .cancel-btn {
+            flex: 1;
+            border: none;
+            background: #777;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-
-    if(!slug){
-
-        document.getElementById("testDetails")
-        .innerHTML =
-        "<h3>কোনো টেস্ট নির্বাচন করা হয়নি</h3>";
-
-        return;
-    }
-
-
-    try{
-
-
-        const snapshot =
-        await getDocs(collection(db,"tests"));
-
-
-        let found = null;
-
-
-        snapshot.forEach(doc=>{
-
-            const data = doc.data();
-
-
-            if(data.slug === slug){
-
-                found = data;
-
+        @media (max-width: 600px) {
+            .admin-header {
+                padding: 15px;
             }
 
-        });
+            .admin-header h1 {
+                font-size: 20px;
+            }
 
-
-
-        if(!found){
-
-            document.getElementById("testDetails")
-            .innerHTML =
-            "<h3>টেস্ট পাওয়া যায়নি</h3>";
-
-            return;
-
+            .modal-content {
+                padding: 18px;
+            }
         }
-
-
-
-        document.getElementById("testDetails")
-        .innerHTML = `
-
-
-        <h1>${found.name}</h1>
-
-
-        <p>
-        <b>ক্যাটাগরি:</b>
-        ${found.category || "-"}
-        </p>
-
-
-        <p>
-        <b>টেস্ট করার কারণ:</b><br>
-        ${found.purpose || "-"}
-        </p>
-
-
-        <p>
-        <b>বিবরণ:</b><br>
-        ${found.description || "-"}
-        </p>
-
-
-        <p>
-        <b>স্যাম্পল:</b>
-        ${found.sample || "-"}
-        </p>
-
-
-        <p>
-        <b>রিপোর্ট সময়:</b>
-        ${found.reportTime || "-"}
-        </p>
-
-
-        <p>
-        <b>প্রস্তুতি:</b>
-        ${found.preparation || "-"}
-        </p>
-
-
-        `;
-
-
-
-        loadDiagnosticPrices(found.slug);
-
-
-
-    }catch(error){
-
-        console.log(error);
-
-    }
-
-
-}
-
-
-
-loadTestDetails();
-  /* Test Details Design */
-
-body{
-    font-family: "Noto Sans Bengali", Arial, sans-serif;
-    background:#f5f7fb;
-    margin:0;
-    padding:0;
-}
-
-
-.container{
-
-    width:90%;
-    max-width:900px;
-    margin:20px auto;
-}
-
-
-
-#testDetails{
-
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
-
-}
-
-
-
-#testDetails h1{
-
-    color:#0F62FE;
-    font-size:28px;
-    margin-bottom:20px;
-
-}
-
-
-
-#testDetails p{
-
-    line-height:1.8;
-    font-size:16px;
-    color:#333;
-
-}
-
-
-
-#testDetails b{
-
-    color:#111;
-
-}
-
-
-
-/* Diagnostic Price Section */
-
-#diagnosticPrices{
-
-    margin-top:30px;
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
-
-}
-
-
-
-#diagnosticPrices h2{
-
-    color:#0F62FE;
-    font-size:22px;
-    margin-bottom:15px;
-
-}
-
-
-
-/* Price Table */
-
-.price-table{
-
-    width:100%;
-    border-collapse:collapse;
-    overflow:hidden;
-
-}
-
-
-
-.price-table th{
-
-    background:#0F62FE;
-    color:white;
-    padding:12px;
-    text-align:center;
-
-}
-
-
-
-.price-table td{
-
-    padding:12px;
-    border-bottom:1px solid #ddd;
-    text-align:center;
-
-}
-
-
-
-.price-table tr:hover{
-
-    background:#f1f7ff;
-
-}
-
-
-
-.no-data{
-
-    color:#777;
-    text-align:center;
-    padding:20px;
-
-}
-
-
-
-/* Back Button */
-
-.back-btn{
-
-    display:inline-block;
-    margin-bottom:20px;
-    padding:10px 18px;
-    background:#0F62FE;
-    color:white;
-    text-decoration:none;
-    border-radius:8px;
-
-}
-
-
-
-.back-btn:hover{
-
-    background:#0848b8;
-
-}
-
-
-
-/* Mobile Responsive */
-
-@media(max-width:600px){
-
-
-.container{
-
-    width:94%;
-
-}
-
-
-#testDetails{
-
-    padding:18px;
-
-}
-
-
-
-#testDetails h1{
-
-    font-size:22px;
-
-}
-
-
-
-#testDetails p{
-
-    font-size:15px;
-
-}
-
-
-
-.price-table{
-
-    font-size:14px;
-
-}
-
-
-
-.price-table th,
-.price-table td{
-
-    padding:8px 5px;
-
-}
-
-
-
-}
-  <!DOCTYPE html>
-<html lang="bn">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>MediTest BD - Test Details</title>
-
-
-<link rel="stylesheet" href="style.css">
-
-
-<style>
-
-body{
-
-font-family:"Noto Sans Bengali",Arial,sans-serif;
-
-background:#f5f7fb;
-
-margin:0;
-
-}
-
-
-header{
-
-background:#0F62FE;
-
-color:white;
-
-padding:18px;
-
-text-align:center;
-
-}
-
-
-header h1{
-
-margin:0;
-
-font-size:28px;
-
-}
-
-
-.container{
-
-width:90%;
-
-max-width:900px;
-
-margin:20px auto;
-
-}
-
-
-
-.back-btn{
-
-display:inline-block;
-
-background:#0F62FE;
-
-color:white;
-
-padding:10px 18px;
-
-border-radius:8px;
-
-text-decoration:none;
-
-margin-bottom:20px;
-
-}
-
-
-
-#testDetails,
-#diagnosticPrices{
-
-
-background:white;
-
-padding:25px;
-
-border-radius:15px;
-
-box-shadow:0 4px 15px rgba(0,0,0,.08);
-
-margin-bottom:25px;
-
-
-}
-
-
-
-#testDetails h1{
-
-color:#0F62FE;
-
-}
-
-
-
-#testDetails p{
-
-line-height:1.8;
-
-font-size:16px;
-
-}
-
-
-
-#diagnosticPrices h2{
-
-color:#0F62FE;
-
-}
-
-
-
-.price-table{
-
-width:100%;
-
-border-collapse:collapse;
-
-}
-
-
-
-.price-table th{
-
-background:#0F62FE;
-
-color:white;
-
-padding:12px;
-
-}
-
-
-
-.price-table td{
-
-padding:12px;
-
-border-bottom:1px solid #ddd;
-
-text-align:center;
-
-}
-
-
-
-footer{
-
-text-align:center;
-
-padding:20px;
-
-color:#666;
-
-}
-
-
-
-@media(max-width:600px){
-
-
-.container{
-
-width:94%;
-
-}
-
-
-#testDetails,
-#diagnosticPrices{
-
-padding:15px;
-
-}
-
-
-
-.price-table th,
-.price-table td{
-
-font-size:14px;
-
-padding:8px;
-
-}
-
-
-}
-
-
-
-</style>
-
-
+    </style>
 </head>
-
 
 <body>
 
+    <header class="admin-header">
+        <h1>🧪 Test Manager</h1>
 
-<header>
+        <a href="dashboard.html" class="dashboard-link">
+            ← Dashboard
+        </a>
+    </header>
 
-<h1>🩺 MediTest BD</h1>
+    <main class="page-container">
 
-<p>মেডিকেল টেস্টের বিস্তারিত তথ্য</p>
+        <section class="toolbar">
 
-</header>
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="টেস্টের নাম দিয়ে খুঁজুন..."
+            >
 
+            <button
+                type="button"
+                id="addTestBtn"
+                class="primary-btn"
+            >
+                + Add Test
+            </button>
 
+        </section>
 
-<div class="container">
+        <div id="loading" class="loading">
+            Loading...
+        </div>
 
+        <div id="emptyMessage" class="empty hidden">
+            কোনো টেস্ট পাওয়া যায়নি।
+        </div>
 
-<a href="index.html" class="back-btn">
-← ফিরে যান
-</a>
-
-
-
-<div id="testDetails">
-
-<h2>লোড হচ্ছে...</h2>
-
-</div>
-
-
-
-
-<div id="diagnosticPrices">
-
-<h2>ডায়াগনস্টিক সেন্টারের মূল্য</h2>
-
-<p>লোড হচ্ছে...</p>
-
-
-</div>
-
-
-
-</div>
-
-
-
-<footer>
-
-© 2026 MediTest BD
-
-</footer>
-
-
-<script type="module">
-
-import { db } from "./firebase.js";
-
-import { 
-collection,
-getDocs,
-query,
-where
-} from 
-"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
-
-// Test Details Load
-
-async function loadTestDetails(){
-
-
-const params = new URLSearchParams(
-window.location.search
-);
-
-
-const slug = params.get("slug");
-
-
-
-const detailsBox =
-document.getElementById("testDetails");
-
-
-
-if(!slug){
-
-detailsBox.innerHTML =
-"<h2>কোনো টেস্ট নির্বাচন করা হয়নি</h2>";
-
-return;
-
-}
-
-
-
-try{
-
-
-const snapshot =
-await getDocs(
-collection(db,"tests")
-);
-
-
-
-let testData = null;
-
-
-
-snapshot.forEach(doc=>{
-
-
-const data = doc.data();
-
-
-
-if(data.slug === slug){
-
-testData = data;
-
-}
-
-
-});
-
-
-
-
-if(!testData){
-
-
-detailsBox.innerHTML =
-"<h2>টেস্ট পাওয়া যায়নি</h2>";
-
-return;
-
-
-}
-
-
-
-
-detailsBox.innerHTML = `
-
-
-<h1>${testData.name || "-"}</h1>
-
-
-<p>
-<b>ক্যাটাগরি:</b>
-${testData.category || "-"}
-</p>
-
-
-<p>
-<b>টেস্ট করার কারণ:</b><br>
-${testData.purpose || "-"}
-</p>
-
-
-<p>
-<b>বিস্তারিত:</b><br>
-${testData.description || "-"}
-</p>
-
-
-<p>
-<b>স্যাম্পল:</b>
-${testData.sample || "-"}
-</p>
-
-
-<p>
-<b>রিপোর্ট সময়:</b>
-${testData.reportTime || "-"}
-</p>
-
-
-<p>
-<b>প্রস্তুতি:</b>
-${testData.preparation || "-"}
-</p>
-
-
-<p>
-<b>স্বাভাবিক রেঞ্জ:</b>
-${testData.normalRange || "-"}
-</p>
-
-
-<p>
-<b>নোট:</b>
-${testData.note || "-"}
-</p>
-
-
-`;
-
-
-
-// Price Load
-
-loadDiagnosticPrices(slug);
-
-
-
-}
-catch(error){
-
-
-console.log(error);
-
-
-detailsBox.innerHTML =
-"<p>ডাটা লোড করতে সমস্যা হয়েছে</p>";
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-// Diagnostic Price Load
-
-
-async function loadDiagnosticPrices(slug){
-
-
-
-const priceBox =
-document.getElementById(
-"diagnosticPrices"
-);
-
-
-
-try{
-
-
-const q = query(
-
-collection(db,"diagnostic_prices"),
-
-where(
-"testSlug",
-"==",
-slug
-)
-
-);
-
-
-
-const snapshot =
-await getDocs(q);
-
-
-
-
-if(snapshot.empty){
-
-
-priceBox.innerHTML = `
-
-<h2>🏥 ডায়াগনস্টিক মূল্য</h2>
-
-<p>
-বর্তমানে কোনো মূল্য পাওয়া যায়নি।
-</p>
-
-`;
-
-return;
-
-
-}
-
-
-
-
-let html = `
-
-
-<h2>🏥 ডায়াগনস্টিক মূল্য</h2>
-
-
-<table class="price-table">
-
-
-<tr>
-
-<th>
-সেন্টার
-</th>
-
-
-<th>
-শহর
-</th>
-
-
-<th>
-মূল্য
-</th>
-
-
-</tr>
-
-
-
-`;
-
-
-
-
-snapshot.forEach(doc=>{
-
-
-const data = doc.data();
-
-
-
-html += `
-
-
-<tr>
-
-<td>
-${data.center || "-"}
-</td>
-
-
-<td>
-${data.city || "-"}
-</td>
-
-
-<td>
-৳ ${data.price || "-"}
-</td>
-
-
-</tr>
-
-
-`;
-
-
-
-});
-
-
-
-
-html += `
-
-</table>
-
-`;
-
-
-
-priceBox.innerHTML = html;
-
-
-
-}
-catch(error){
-
-
-console.log(error);
-
-
-
-priceBox.innerHTML =
-
-"<p>মূল্য লোড করা যায়নি</p>";
-
-
-
-}
-
-
-
-}
-
-
-
-
-// Start
-
-loadTestDetails();
-
-
-
-</script>
-
+        <section class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Test Name</th>
+                        <th>Category</th>
+                        <th>Department</th>
+                        <th>Sample</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tableBody"></tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <!-- Add/Edit Modal -->
+
+    <div
+        id="testModal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <h2 id="modalTitle">
+                Add New Test
+            </h2>
+
+            <form id="testForm">
+
+                <input
+                    type="hidden"
+                    id="docId"
+                >
+
+                <div class="form-group">
+                    <label for="name">Test Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="slug">Slug</label>
+
+                    <input
+                        type="text"
+                        id="slug"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+
+                    <input
+                        type="text"
+                        id="category"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Department</label>
+
+                    <input
+                        type="text"
+                        id="department"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="sample">Sample</label>
+
+                    <input
+                        type="text"
+                        id="sample"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price</label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        min="0"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+
+                    <textarea
+                        id="description"
+                        rows="4"
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="preparation">Preparation</label>
+
+                    <textarea
+                        id="preparation"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="reportTime">Report Time</label>
+
+                    <input
+                        type="text"
+                        id="reportTime"
+                        placeholder="যেমন: 24 Hours"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="normalRange">Normal Range</label>
+
+                    <textarea
+                        id="normalRange"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="purpose">Purpose</label>
+
+                    <textarea
+                        id="purpose"
+                        rows="4"
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">Note</label>
+
+                    <textarea
+                        id="note"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="modal-actions">
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        Save Test
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelBtn"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script
+        type="module"
+        src="tests.js"
+    ></script>
 
 </body>
 
