@@ -1,287 +1,582 @@
 import { db } from "../firebase.js";
 
-
 import {
-collection,
-addDoc,
-getDocs,
-deleteDoc,
-doc,
-updateDoc
+    collection,
+    getDocs,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    doc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+// ===============================
+// Firestore Collection
+// ===============================
+
+const testsCollection = collection(db, "tests");
+
+
+// ===============================
+// DOM Elements
+// ===============================
+
+const tableBody = document.getElementById("tableBody");
+const loading = document.getElementById("loading");
+const emptyMessage = document.getElementById("emptyMessage");
+
+const searchInput = document.getElementById("searchInput");
+const addTestBtn = document.getElementById("addTestBtn");
+
+const testModal = document.getElementById("testModal");
+const modalTitle = document.getElementById("modalTitle");
+
+const testForm = document.getElementById("testForm");
+const cancelBtn = document.getElementById("cancelBtn");
+
+
+// ===============================
+// Form Fields
+// ===============================
+
+const docId = document.getElementById("docId");
+const nameInput = document.getElementById("name");
+const slugInput = document.getElementById("slug");
+const categoryInput = document.getElementById("category");
+const departmentInput = document.getElementById("department");
+const sampleInput = document.getElementById("sample");
+const priceInput = document.getElementById("price");
+const descriptionInput = document.getElementById("description");
+const preparationInput = document.getElementById("preparation");
+const reportTimeInput = document.getElementById("reportTime");
+const normalRangeInput = document.getElementById("normalRange");
+const purposeInput = document.getElementById("purpose");
+const noteInput = document.getElementById("note");
+
+
+// ===============================
+// Local Test Data
+// ===============================
+
+let allTests = [];
+
+
+// ===============================
+// Load Tests
+// ===============================
+
+async function loadTests() {
+
+    try {
+
+        loading.classList.remove("hidden");
+        emptyMessage.classList.add("hidden");
+
+        tableBody.innerHTML = "";
+
+        const snapshot = await getDocs(testsCollection);
+
+        allTests = snapshot.docs.map((document) => {
+
+            return {
+                id: document.id,
+                ...document.data()
+            };
+
+        });
+
+        renderTests(allTests);
+
+    } catch (error) {
+
+        console.error("Load Tests Error:", error);
+
+        tableBody.innerHTML = "";
+
+        emptyMessage.textContent =
+            "❌ টেস্ট লোড করা যায়নি। Firebase Permission অথবা Connection চেক করুন।";
+
+        emptyMessage.classList.remove("hidden");
+
+    } finally {
+
+        loading.classList.add("hidden");
+
+    }
+
 }
-from 
-"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
+// ===============================
+// Render Tests
+// ===============================
 
-// Collection Name
+function renderTests(tests) {
 
-const testCollection = collection(db,"tests");
+    tableBody.innerHTML = "";
 
+    if (tests.length === 0) {
 
+        emptyMessage.textContent =
+            "কোনো টেস্ট পাওয়া যায়নি।";
 
-// Add New Test
+        emptyMessage.classList.remove("hidden");
 
-window.addTest = async function(){
+        return;
 
+    }
 
-
-const data = {
-
-
-name:
-document.getElementById("name").value,
-
-
-slug:
-document.getElementById("slug").value.toLowerCase(),
+    emptyMessage.classList.add("hidden");
 
 
-category:
-document.getElementById("category").value,
+    tests.forEach((test, index) => {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+
+            <td>${index + 1}</td>
+
+            <td>${escapeHTML(test.name || "-")}</td>
+
+            <td>${escapeHTML(test.category || "-")}</td>
+
+            <td>${escapeHTML(test.department || "-")}</td>
+
+            <td>${escapeHTML(test.sample || "-")}</td>
+
+            <td>৳ ${escapeHTML(String(test.price ?? "-"))}</td>
+
+            <td>
+
+                <button
+                    class="action-btn edit-btn"
+                    data-action="edit"
+                    data-id="${test.id}"
+                >
+                    Edit
+                </button>
+
+                <button
+                    class="action-btn delete-btn"
+                    data-action="delete"
+                    data-id="${test.id}"
+                >
+                    Delete
+                </button>
+
+            </td>
+
+        `;
+
+        tableBody.appendChild(row);
+
+    });
+
+}
 
 
-price:
-document.getElementById("price").value,
+// ===============================
+// Search
+// ===============================
 
+searchInput.addEventListener(
+    "input",
+    function () {
 
-purpose:
-document.getElementById("purpose").value,
+        const searchText =
+            this.value.trim().toLowerCase();
 
+        const filteredTests =
+            allTests.filter((test) => {
 
-description:
-document.getElementById("description").value,
+                const name =
+                    String(test.name || "").toLowerCase();
 
+                const category =
+                    String(test.category || "").toLowerCase();
 
-sample:
-document.getElementById("sample").value,
+                const department =
+                    String(test.department || "").toLowerCase();
 
+                const slug =
+                    String(test.slug || "").toLowerCase();
 
-preparation:
-document.getElementById("preparation").value,
+                return (
 
+                    name.includes(searchText) ||
+                    category.includes(searchText) ||
+                    department.includes(searchText) ||
+                    slug.includes(searchText)
 
-reportTime:
-document.getElementById("reportTime").value,
+                );
 
+            });
 
-normalRange:
-document.getElementById("normalRange").value,
+        renderTests(filteredTests);
 
-
-note:
-document.getElementById("note").value,
-
-
-createdAt:
-new Date()
-
-};
-
-
-
-
-try{
-
-
-await addDoc(
-testCollection,
-data
+    }
 );
 
 
+// ===============================
+// Open Add Modal
+// ===============================
 
-alert("✅ Test Added Successfully");
+addTestBtn.addEventListener(
+    "click",
+    function () {
 
+        resetForm();
 
+        modalTitle.textContent =
+            "Add New Test";
 
-loadTests();
+        testModal.classList.add("active");
 
-
-
-}
-
-catch(error){
-
-console.log(error);
-
-alert("Error Adding Test");
-
-
-}
+    }
+);
 
 
-}
+// ===============================
+// Close Modal
+// ===============================
+
+cancelBtn.addEventListener(
+    "click",
+    closeModal
+);
 
 
+testModal.addEventListener(
+    "click",
+    function (event) {
+
+        if (event.target === testModal) {
+
+            closeModal();
+
+        }
+
+    }
+);
 
 
+function closeModal() {
 
-
-// Show All Tests
-
-
-async function loadTests(){
-
-
-const list =
-document.getElementById("testList");
-
-
-
-if(!list) return;
-
-
-
-list.innerHTML="";
-
-
-
-const snapshot =
-await getDocs(testCollection);
-
-
-
-snapshot.forEach(docItem=>{
-
-
-const data =
-docItem.data();
-
-
-
-list.innerHTML += `
-
-
-<div class="test-card">
-
-
-<h3>
-${data.name}
-</h3>
-
-
-<p>
-Category:
-${data.category}
-</p>
-
-
-<p>
-Price:
-৳${data.price}
-</p>
-
-
-
-<button onclick="deleteTest('${docItem.id}')">
-
-Delete
-
-</button>
-
-
-
-</div>
-
-
-`;
-
-
-});
-
-
+    testModal.classList.remove("active");
 
 }
 
 
+// ===============================
+// Submit Form
+// ===============================
+
+testForm.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+        const id =
+            docId.value.trim();
+
+        const testData = {
+
+            name: nameInput.value.trim(),
+
+            slug: slugInput.value.trim().toLowerCase(),
+
+            category: categoryInput.value.trim(),
+
+            department: departmentInput.value.trim(),
+
+            sample: sampleInput.value.trim(),
+
+            price: Number(priceInput.value) || 0,
+
+            description: descriptionInput.value.trim(),
+
+            preparation: preparationInput.value.trim(),
+
+            reportTime: reportTimeInput.value.trim(),
+
+            normalRange: normalRangeInput.value.trim(),
+
+            purpose: purposeInput.value.trim(),
+
+            note: noteInput.value.trim()
+
+        };
 
 
+        try {
+
+            const saveButton =
+                testForm.querySelector(
+                    'button[type="submit"]'
+                );
+
+            saveButton.disabled = true;
+
+            saveButton.textContent =
+                "Saving...";
 
 
+            if (id) {
+
+                await updateDoc(
+
+                    doc(db, "tests", id),
+
+                    {
+
+                        ...testData,
+
+                        updatedAt: serverTimestamp()
+
+                    }
+
+                );
+
+                alert("✅ Test updated successfully!");
+
+            } else {
+
+                await addDoc(
+
+                    testsCollection,
+
+                    {
+
+                        ...testData,
+
+                        createdAt: serverTimestamp()
+
+                    }
+
+                );
+
+                alert("✅ Test added successfully!");
+
+            }
+
+
+            closeModal();
+
+            resetForm();
+
+            await loadTests();
+
+
+        } catch (error) {
+
+            console.error("Save Test Error:", error);
+
+            alert(
+                "❌ Test save করা যায়নি। Firebase Permission অথবা Connection চেক করুন।"
+            );
+
+        } finally {
+
+            const saveButton =
+                testForm.querySelector(
+                    'button[type="submit"]'
+                );
+
+            saveButton.disabled = false;
+
+            saveButton.textContent =
+                "Save Test";
+
+        }
+
+    }
+);
+
+
+// ===============================
+// Table Actions
+// ===============================
+
+tableBody.addEventListener(
+    "click",
+    async function (event) {
+
+        const button =
+            event.target.closest("button");
+
+        if (!button) return;
+
+        const id =
+            button.dataset.id;
+
+        const action =
+            button.dataset.action;
+
+
+        const selectedTest =
+            allTests.find(
+                (test) => test.id === id
+            );
+
+        if (!selectedTest) return;
+
+
+        if (action === "edit") {
+
+            openEditModal(selectedTest);
+
+        }
+
+
+        if (action === "delete") {
+
+            await deleteTest(id);
+
+        }
+
+    }
+);
+
+
+// ===============================
+// Open Edit Modal
+// ===============================
+
+function openEditModal(test) {
+
+    docId.value =
+        test.id || "";
+
+    nameInput.value =
+        test.name || "";
+
+    slugInput.value =
+        test.slug || "";
+
+    categoryInput.value =
+        test.category || "";
+
+    departmentInput.value =
+        test.department || "";
+
+    sampleInput.value =
+        test.sample || "";
+
+    priceInput.value =
+        test.price ?? "";
+
+    descriptionInput.value =
+        test.description || "";
+
+    preparationInput.value =
+        test.preparation || "";
+
+    reportTimeInput.value =
+        test.reportTime || "";
+
+    normalRangeInput.value =
+        test.normalRange || "";
+
+    purposeInput.value =
+        test.purpose || "";
+
+    noteInput.value =
+        test.note || "";
+
+
+    modalTitle.textContent =
+        "Edit Test";
+
+    testModal.classList.add("active");
+
+}
+
+
+// ===============================
 // Delete Test
+// ===============================
+
+async function deleteTest(id) {
+
+    const confirmed =
+        confirm(
+            "আপনি কি এই টেস্টটি মুছে ফেলতে চান?"
+        );
+
+    if (!confirmed) return;
 
 
-window.deleteTest = async function(id){
+    try {
 
+        await deleteDoc(
+            doc(db, "tests", id)
+        );
 
-if(confirm("Delete this test?")){
+        alert(
+            "✅ Test deleted successfully!"
+        );
 
+        await loadTests();
 
-await deleteDoc(
-doc(db,"tests",id)
-);
+    } catch (error) {
 
+        console.error(
+            "Delete Test Error:",
+            error
+        );
 
+        alert(
+            "❌ Test delete করা যায়নি।"
+        );
 
-alert("Deleted");
-
-
-loadTests();
-
-
-}
-
-
-}
-
-
-
-
-
-
-// Update Test
-
-
-window.updateTest = async function(id){
-
-
-const ref =
-doc(db,"tests",id);
-
-
-
-await updateDoc(ref,{
-
-
-name:
-document.getElementById("name").value,
-
-
-category:
-document.getElementById("category").value,
-
-
-price:
-document.getElementById("price").value,
-
-
-purpose:
-document.getElementById("purpose").value,
-
-
-description:
-document.getElementById("description").value
-
-
-});
-
-
-
-alert("Updated");
-
-
-loadTests();
-
+    }
 
 }
 
 
+// ===============================
+// Reset Form
+// ===============================
+
+function resetForm() {
+
+    testForm.reset();
+
+    docId.value = "";
+
+    modalTitle.textContent =
+        "Add New Test";
+
+}
 
 
+// ===============================
+// Escape HTML
+// ===============================
+
+function escapeHTML(value) {
+
+    return String(value)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
 
 
-// Load When Page Open
-
+// ===============================
+// Start
+// ===============================
 
 loadTests();
