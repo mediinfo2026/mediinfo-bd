@@ -358,7 +358,8 @@ function renderTests() {
 
     createCard(
       item.name || item.title || "Test",
-      item.category || ""
+      item.category || "",
+      `test-details.html?slug=${item.slug || ""}`
     )
 
   ).join("");
