@@ -390,10 +390,10 @@ function renderDiseases() {
   diseasesGrid.innerHTML = diseases.map(item =>
 
     createCard(
-      item.name || item.title || "Disease",
-      item.department || ""
-    )
-
+  item.name || item.title || "Disease",
+  item.department || "",
+  `disease.html?id=${item.id}`
+)
   ).join("");
 
 }
@@ -417,9 +417,10 @@ function renderDoctorGuides() {
   doctorGuideGrid.innerHTML = doctorGuides.map(item =>
 
     createCard(
-      item.disease || item.name || "Doctor Guide",
-      item.department || item.specialist || ""
-    )
+  item.disease || item.name || "Doctor Guide",
+  item.department || item.specialist || "",
+  `doctor-guide.html?id=${item.id}`
+)
 
   ).join("");
 
@@ -444,9 +445,10 @@ function renderHospitals() {
   hospitalGrid.innerHTML = hospitals.map(item =>
 
     createCard(
-      item.name || "Hospital",
-      item.city || item.address || ""
-    )
+  item.name || "Hospital",
+  item.city || item.address || "",
+  `hospital.html?id=${item.id}`
+)
 
   ).join("");
 
@@ -474,9 +476,10 @@ function renderDiagnosticCenters() {
   diagnosticGrid.innerHTML = diagnosticCenters.map(item =>
 
     createCard(
-      item.name || "Diagnostic Center",
-      item.city || item.address || ""
-    )
+  item.name || "Diagnostic Center",
+  item.city || item.address || "",
+  `diagnostic-center.html?id=${item.id}`
+)
 
   ).join("");
 
